@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id('item_id');
             $table->string('item_name');
-            $table->string('brand'); 
-            $table->string('item_photo_path'); 
-            $table->float('unit_cost'); 
-            $table->float('item_price'); 
-            $table->timestamp('created_at'); 
+            $table->string('brand');
+            $table->string('item_photo_path');
+            $table->decimal('unit_cost', $precision = 8, $scale = 2);
+            $table->decimal('item_price', $precision = 8, $scale = 2);
+            $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('item');
     }
 };
