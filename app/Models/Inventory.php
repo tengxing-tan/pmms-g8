@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Item;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Inventory extends Model
 {
@@ -16,15 +17,16 @@ class Inventory extends Model
     protected $primaryKey = 'inventory_id';
 
     protected $fillable = [
+        'item_id', 
         'opening_quantity',
         'closing_quantity',
         'current_quantity',
         'comment'
     ];
 
-    public function item(): HasMany
+    public function item()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsTo(Item::class, 'item_id', 'item_id');
     }
 
     // public function daily_roster(): HasOne

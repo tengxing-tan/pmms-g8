@@ -46,4 +46,5 @@ Route::middleware([
         });
 });
 
+// Route to cashier main view
 Route::get('/items', [PaymentController::class, 'index'])->name('items');

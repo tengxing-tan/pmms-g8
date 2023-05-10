@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('inventory', function (Blueprint $table) {
             $table->id('inventory_id');
-            // $table->foreignId('item_id');
+            $table->foreignId('item_id')->constrained('items', 'item_id')->onDelete('cascade');
             $table->foreignId('daily_roster_id');
             $table->integer('opening_quantity');
             $table->integer('closing_quantity');
-            $table->integer('current_quantity');
             $table->string('comment')->nullable();
             $table->timestamps();
             // $table->dateTime('created_at');

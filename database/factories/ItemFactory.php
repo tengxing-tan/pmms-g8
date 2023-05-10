@@ -30,6 +30,7 @@ class ItemFactory extends Factory
             'brand' => $this->faker->word(),
             'item_photo_path' => $this->faker->imageUrl(640, 480, 'cats'),
             'unit_cost' => $this->faker->randomFloat(2, 10, 20),
+            'current_quantity' => $this->faker->randomDigit()
         ];
     }
 }

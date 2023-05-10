@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('item_photo_path');
             $table->decimal('unit_cost', $precision = 8, $scale = 2);
             $table->decimal('item_price', $precision = 8, $scale = 2);
+            $table->integer('current_quantity'); 
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
