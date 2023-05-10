@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Inventory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +20,17 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Inventory::factory(10)->create();
+        
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'test@example.com',
+            'password' => 'test1234'
+        ]);
+
+        \App\Models\Item::factory(10)->create();
+        \App\Models\Payment::factory(10)->create();
+        \App\Models\PaymentDetail::factory(20)->create();
     }
 }
