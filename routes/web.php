@@ -36,4 +36,5 @@ Route::resource('inventory', InventoryController::class)
         return Redirect::route('inventory.index'); // invoked if not be found for any of the resource's route
     }); 
 
+// Route to cashier main view
 Route::get('/items', [PaymentController::class, 'index'])->name('items');

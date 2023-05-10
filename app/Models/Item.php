@@ -12,4 +12,10 @@ class Item extends Model
     public function paymentDetails() {
         return $this->hasMany(PaymentDetail::class, 'item_id');
     }
+
+    public function scopeFilter($query, array $search) {
+        if ($search['search'] ?? false) {
+            $query->where('item_name', 'like', '%', request('search'), '%'); 
+        }
+    }
 }

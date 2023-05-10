@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // Declaring the Payments table schema
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
