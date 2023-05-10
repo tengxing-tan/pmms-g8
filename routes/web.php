@@ -39,11 +39,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
 
-Route::resource('inventory', InventoryController::class)
-    ->missing(function (Request $request) {
-        return Redirect::route('inventory.index'); // invoked if not be found for any of the resource's route
-    });
+    Route::resource('inventory', InventoryController::class)
+        ->missing(function (Request $request) {
+            return Redirect::route('inventory.index'); // invoked if not be found for any of the resource's route
+        });
+});
 
 Route::get('/items', [PaymentController::class, 'index'])->name('items');

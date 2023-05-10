@@ -30,8 +30,10 @@
                             </div>
                             @enderror
                         </div><br>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <a href="{{url('admin-announcement-list')}}" class="btn btn-danger">Back</a>
+                        <div>
+                            <button class="btn btn-primary">Save</button>
+                            <a href="{{url('admin-announcement-list')}}" class="btn btn-danger">Back</a>
+                        </div>
                     </form>
                 </div>
             </div>

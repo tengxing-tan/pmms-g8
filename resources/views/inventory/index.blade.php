@@ -32,7 +32,7 @@
                 <a class="btn btn-primary" href="{{ route('inventory.edit',$inventory->inventory_id) }}">Edit</a>
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button class="btn btn-danger">Delete</button>
             </form>
         </td>
         @endforeach
