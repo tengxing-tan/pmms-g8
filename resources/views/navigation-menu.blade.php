@@ -21,6 +21,9 @@
                     <x-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
                         {{ __('Payment') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('admin-announcement-list') }}" :active="request()->routeIs('admin-announcement-list')">
+                        {{ __('Announcement') }}
+                    </x-nav-link>
                 </div>
             </div>
 
