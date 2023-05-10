@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\InventoryController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,6 @@ Route::middleware([
 Route::resource('inventory', InventoryController::class)
     ->missing(function (Request $request) {
         return Redirect::route('inventory.index');
-    });;
+    });
+
+Route::get('/items', [PaymentController::class, 'index']);
