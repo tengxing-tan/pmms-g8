@@ -16,13 +16,13 @@ class InventoryFactory extends Factory
      */
     public function definition(): array
     {
+        static $number = 1; 
         return [
-            // 'item_id' => $this->faker->randomDigit(),
+            'item_id' => $number++, 
             'daily_roster_id' => $this->faker->randomDigit(),
 
             'opening_quantity' => $this->faker->randomDigit(),
             'closing_quantity' => $this->faker->randomDigit(),
-            'current_quantity' => $this->faker->randomDigit(),
             'comment' => $this->faker->text()
         ];
     }

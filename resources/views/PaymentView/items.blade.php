@@ -13,7 +13,7 @@
 
         <div class="mx-4 mt-8 grid lg:grid-cols-5 gap-12 md:grid-cols-3">
 
-            @unless(count($items) == 0)
+            @unless(count($inventories) == 0)
         
             @foreach($items as $item)
                 <x-item-card :item="$item"/>
