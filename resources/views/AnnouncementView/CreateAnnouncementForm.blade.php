@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot:title>Create Announcement</x-slot>
-
         <div class="container" style="margin-top:20px">
             <div class="row">
                 <div class="col-md-12">
