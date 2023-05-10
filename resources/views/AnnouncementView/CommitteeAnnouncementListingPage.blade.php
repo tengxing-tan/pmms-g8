@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Announcement List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-</head>
-<body>
+<x-app-layout>
+    <x-slot>Announcement List</x-slot>
 
     <div class="container" style="margin-top:20px">
         <div class="row">
@@ -28,14 +20,14 @@
                     </thead>
                     <tbody>
                         @php
-                            $i = 1;
+                        $i = 1;
                         @endphp
                         @foreach ( $announcements as $ann )
-                            <tr>
-                                <td>{{$i++}}</td>
-                                <td>{{$ann->title}}</td>
-                                <td><a href="{{url('view-announcement/'.$ann->id)}}" class="btn btn-primary">View</a>
-                            </tr>
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$ann->title}}</td>
+                            <td><a href="{{url('view-announcement/'.$ann->id)}}" class="btn btn-primary">View</a>
+                        </tr>
 
                         @endforeach
                     </tbody>
@@ -43,6 +35,4 @@
             </div>
         </div>
     </div>
-
-</body>
-</html>
+</x-app-layout>
