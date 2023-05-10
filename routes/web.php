@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('admin-announcement-list',[AnnouncementController::class,'index']);
+Route::get('create-announcement',[AnnouncementController::class,'create']);
+Route::post('save-announcement',[AnnouncementController::class,'store']);
+Route::get('edit-announcement/{id}',[AnnouncementController::class,'edit']);
+Route::post('update-announcement',[AnnouncementController::class,'update']);
+Route::get('delete-announcement/{id}',[AnnouncementController::class,'destroy']);
+Route::get('committee-announcement-list',[AnnouncementController::class,'indexCommitteeAnnouncement']);
+Route::get('view-announcement/{id}',[AnnouncementController::class,'show']);
 
 Route::middleware([
     'auth:sanctum',
