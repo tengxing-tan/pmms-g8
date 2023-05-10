@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\InventoryController;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +29,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('inventory', InventoryController::class)
+    ->missing(function (Request $request) {
+        return Redirect::route('inventory.index');
+    });;
