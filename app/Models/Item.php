@@ -28,9 +28,13 @@ class Item extends Model
         return $this->hasMany(Inventory::class, 'item_id', 'item_id');
     }
 
-    public function scopeFilter($query, array $search) {
-        if ($search['search'] ?? false) {
+    public function scopeFilter($query, array $filters) {
+        if ($filters['search'] ?? false) {
             $query->where('item_name', 'like', '%', request('search'), '%'); 
-        }
+        }            // $query->where('item_id', 'like', '%', request('item_id'), '%'); 
+    }
+
+    public function scopegetItem($item_id) {
+        return Item::where('item_id', $item_id)->first();
     }
 }

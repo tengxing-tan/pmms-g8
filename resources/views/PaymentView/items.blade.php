@@ -11,22 +11,23 @@
             </div>
         </form>
 
-        <div class="mx-4 mt-8 grid lg:grid-cols-5 gap-12 md:grid-cols-3">
+        <form action="/payment" method="POST">
+            @csrf
+            <div class="mx-4 mt-8 grid lg:grid-cols-5 gap-12 md:grid-cols-3">
+            
+                @unless(count($items) == 0)
 
-            @unless(count($inventories) == 0)
-        
-            @foreach($items as $item)
-                <x-item-card :item="$item"/>
-            @endforeach
-        
-            @else
-            <p>No items found</p>
-            @endunless
-        
+                @foreach($items as $item)
+                    <x-item-card :item="$item"/>
+                @endforeach
+
+                @else
+                    <p>No listings found</p>
+                @endunless
             </div> 
-        
-            <div class="mt-6 p-4">
-                {{$items->links()}}
+            <div class="flex justify-end mr-6 mt-6">
+                <x-button class="flex pt-2 align-self-end">NEXT</x-button>
             </div>
+        </form>
     </div>
 </x-app-layout>

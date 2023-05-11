@@ -38,3 +38,9 @@ Route::resource('inventory', InventoryController::class)
 
 // Route to cashier main view
 Route::get('/items', [PaymentController::class, 'index'])->name('items');
+
+//Route to payment view
+Route::post('/payment', [PaymentController::class, 'payment']);
+
+//Route to receipt view
+Route::post('/receipt', [PaymentController::class, 'receipt']);

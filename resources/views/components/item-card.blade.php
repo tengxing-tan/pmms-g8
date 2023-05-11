@@ -10,7 +10,7 @@
         <div class="rounded-full drop-shadow-sm px-4 py-2 border-2 border-gray-500 hover:border-1 hover:border-orange-200 active:border-orange-400">
                 <button type="button" x-on:click="decrement()">-</button>
         </div>
-        <input type="text" disabled name="quantity" x-bind:value="count" class="w-1/4 border-none text-center focus:ring-orange-400"/>
+        <input type="text" readonly name="{{$item->item_id}}" x-bind:value="count" class="w-1/4 border-none text-center focus:ring-orange-400"/>
         <div class="rounded-full drop-shadow-sm px-4 py-2 border-2 border-gray-500 hover:border-1 hover:border-orange-200 active:border-orange-400">
             <button type="button" x-on:click="increment()">+</button>
         </div>
