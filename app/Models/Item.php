@@ -12,20 +12,21 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'item_id', 
+        'id', 
         'item_name',
         'brand',
+        'quantity',
         'item_photo_path',
         'unit_cost',
         'item_price'
     ];
 
     public function payment_details() {
-        return $this->hasMany(PaymentDetail::class, 'item_id', 'item_id');
+        return $this->hasMany(PaymentDetail::class, 'id', 'id');
     }
 
     public function inventories() {
-        return $this->hasMany(Inventory::class, 'item_id', 'item_id');
+        return $this->hasMany(Inventory::class, 'id', 'id');
     }
 
     public function scopeFilter($query, array $filters) {

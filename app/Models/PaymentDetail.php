@@ -11,7 +11,7 @@ class PaymentDetail extends Model
 
     protected $fillable = [
         'payment_id',
-        'item_id',
+        'id',
         'quantity',
         'total_price'
     ];
