@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,9 +40,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::resource('inventory', InventoryController::class)
+    Route::resource('item', ItemController::class)
         ->missing(function (Request $request) {
-            return Redirect::route('inventory.index'); // invoked if not be found for any of the resource's route
+            return Redirect::route('item.index'); // invoked if not be found for any of the resource's route
         });
 });
 
