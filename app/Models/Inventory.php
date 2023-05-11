@@ -17,7 +17,7 @@ class Inventory extends Model
     protected $primaryKey = 'inventory_id';
 
     protected $fillable = [
-        'item_id', 
+        'id', 
         'opening_quantity',
         'closing_quantity',
         'current_quantity',
@@ -26,7 +26,7 @@ class Inventory extends Model
 
     public function item()
     {
-        return $this->belongsTo(Item::class, 'item_id', 'item_id');
+        return $this->belongsTo(Item::class, 'id', 'id');
     }
 
     // public function daily_roster(): HasOne

@@ -18,7 +18,7 @@ class InventoryFactory extends Factory
     {
         static $number = 1; 
         return [
-            'item_id' => $number++, 
+            'id' => $number++, 
             'daily_roster_id' => $this->faker->randomDigit(),
 
             'opening_quantity' => $this->faker->randomDigit(),
