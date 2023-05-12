@@ -17,12 +17,16 @@
                 <input type="number" name="total_price" value="{{$total_price}}" class="text-lg font-black text-orange-400 hidden"/>
             </div>
             <div class="flex justify-between my-4 mx-8">
-                <span class="font-black text-lg">Payment Amount (RM)</span>
-                <input type="decimal" name="payment_amount" placeholder="Enter Payment Amount" class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"/>
+                <label for="paid_amount" class="font-black text-lg">Payment Amount (RM)</label>
+                <input type="decimal" name="paid_amount" placeholder="Enter Payment Amount" class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" required/>
+
+                @error('paid_amount')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
             </div>
     
             <div class="flex justify-end space-x-6 mx-6 mt-8">
-                <a href="/items"><x-secondary-button class="border-orange-400 bg-transparent hover:bg-gray-100 active:bg-gray-200">Cancel</x-secondary-button></a>
+                <a href="/items" class="rounded-lg border-2 border-orange-300 bg-transparent hover:bg-gray-100 active:bg-gray-200"><x-secondary-button>Cancel</x-secondary-button></a>
                 <x-button>Pay</x-button>
             </div>
         </div>

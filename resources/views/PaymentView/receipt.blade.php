@@ -3,7 +3,7 @@
         <p class="font-black text-xl text-center">PAYMENT SUCCESSFUL</p>
         <div class="flex justify-center my-8">
             <div class="relative bg-green-400 rounded-full w-16 h-16">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.0" stroke="#f3f3f3" class="w-8 h-8 bg-green-400 rounded-full m-4 absolute">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.0" stroke="#f3f3f3" class="w-8 h-8 bg-green-400 rounded-full m-3 absolute">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>      
             </div> 
@@ -28,7 +28,7 @@
         </div>
         <div class="flex justify-between my-4 mx-12">
             <span class="font-black text-lg">Paid (RM)</span>
-            <span class="font-black text-lg">RM {{$payment_amount}}</span>
+            <span class="font-black text-lg">RM {{$paid_amount}}</span>
         </div>
         <div class="flex justify-between my-4 mx-12">
             <span class="font-black text-lg">Change</span>

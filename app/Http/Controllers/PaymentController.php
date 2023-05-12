@@ -22,7 +22,7 @@ class PaymentController extends Controller
         $total_price = 0; 
         for($i = 1; $i < count($request->all()); $i++) {
             if($request[$i]>0){
-                $item = Item::where('item_id', $i)->first(); 
+                $item = Item::where('id', $i)->first(); 
                 array_push($items, [$item, $request[$i]]);
                 $total_price += $item->item_price * $request[$i];
             }
@@ -36,39 +36,42 @@ class PaymentController extends Controller
 
     public function receipt(Request $request) {
         $formFields = $request->validate([
-            'payment_amount' => ['required', 'gte:total_price'],
+            "paid_amount" => 'required'
         ]);
         
-        $change = $request['payment_amount'] - $request['total_price'];
+        $change = $request['paid_amount'] - $request['total_price'];
 
         Payment::create([
             'total_price' => $request['total_price'],
             'payment_method' => 'Cash', 
-            'paid_amount' => $formFields['payment_amount'],
+            'paid_amount' => $formFields['paid_amount'],
             'change' => $change
         ]);
 
         $payment_id = Payment::latest('payment_id')->first()->payment_id;
-        $max_item = Item::latest('item_id')->first()->item_id;
+        $max_item = Item::latest('id')->first()->id;
         $items =[]; 
+
         for($i = 1; $i <= $max_item; $i++) {
             if($request[$i]>0){
-                $item = Item::where('item_id', $i)->first(); 
+                $item = Item::where('id', $i)->first(); 
                 array_push($items, [$item, $request[$i]]);
                 PaymentDetail::create([
                     'payment_id' => $payment_id, 
-                    'item_id' => $i, 
+                    'id' => $i, 
                     'quantity' => $request[$i]
                 ]);
             }
         }
 
+        $payment = Payment::latest('payment_id')->first();
+
         return view('PaymentView.receipt', [
             'total_price' => $request['total_price'],
-            'payment_amount' => $formFields['payment_amount'],
+            'paid_amount' => $formFields['paid_amount'],
             'change' => $change, 
             'items' => $items, 
-            'payment' => Payment::latest('payment_id')->first()
+            'payment' => $payment,
         ]);
     }
 }

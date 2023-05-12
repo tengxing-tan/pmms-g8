@@ -32,10 +32,10 @@ class Item extends Model
     public function scopeFilter($query, array $filters) {
         if ($filters['search'] ?? false) {
             $query->where('item_name', 'like', '%', request('search'), '%'); 
-        }            // $query->where('item_id', 'like', '%', request('item_id'), '%'); 
+        }            // $query->where('id', 'like', '%', request('id'), '%'); 
     }
 
-    public function scopegetItem($item_id) {
-        return Item::where('item_id', $item_id)->first();
+    public function scopegetItem($id) {
+        return Item::where('id', $id)->first();
     }
 }

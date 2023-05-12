@@ -11,7 +11,7 @@
             </div>
         </form>
 
-        <form action="/payment" method="POST">
+        <form action="/payment\" method="POST">
             @csrf
             <div class="mx-4 mt-8 grid lg:grid-cols-5 gap-12 md:grid-cols-3">
             
