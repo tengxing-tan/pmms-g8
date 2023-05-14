@@ -10,7 +10,7 @@ use App\Models\PaymentDetail;
 
 class PaymentController extends Controller
 {
-    public function index() {
+    public function items() {
 
         return view('PaymentView.items', [
             'items' => Item::latest()->filter(request(['search']))->get()
