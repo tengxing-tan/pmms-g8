@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot:title>Admin Announcement List</x-slot>
+    <x-slot:title>User List</x-slot>
 
     <div class="p-6 w-full max-w-4xl mx-auto" x-data="{ openPopMesg: true }">
         <!-- success message -->
@@ -13,9 +13,9 @@
         @endif
 
         <div class="grid grid-cols-12 items-center w-full">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800">Announcement List</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-gray-800">User List</h1>
             <div class="col-span-6 justify-self-end">
-                <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor" href="{{url('create-announcement')}}"> Create New Announcement</a>
+                <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor" href="{{url('create-user')}}"> Create New User</a>
             </div>
         </div>
 
@@ -24,8 +24,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Title</th>
-                        <th>Description</th>
+                        <th>Name</th>
+                        <th>Email address</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -33,13 +33,13 @@
                     @php
                     $i = 1;
                     @endphp
-                    @foreach ( $announcements as $ann )
+                    @foreach ( $users as $user )
                     <tr>
                         <td>{{$i++}}</td>
-                        <td>{{$ann->title}}</td>
-                        <td>{{$ann->description}}</td>
-                        <td><a href="{{url('edit-announcement/'.$ann->id)}}" class="btn btn-primary">Edit</a> |
-                            <a href="{{url('delete-announcement/'.$ann->id)}}" class="btn btn-danger">Delete</a>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td><a href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">Edit</a> |
+                            <a href="{{url('delete-user/'.$user->id)}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
 
