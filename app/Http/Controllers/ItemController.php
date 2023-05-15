@@ -14,10 +14,13 @@ class ItemController extends Controller
      */
     public function index()
     {
+        $lowStockAlert = Item::where('quantity', '<', 10)->get();
+
         $items = Item::latest()->paginate(5);
         return view('item.index', compact('items'))
             ->with('i', 0)
-            ->with('title', 'Item List');
+            ->with('title', 'Item List')
+            ->with('lowStockAlert', $lowStockAlert);
         // ->with('i', (request()->input('page', 1) - 1) * 5);
         // return view('item.index')->with('inventories', $inventories);
     }

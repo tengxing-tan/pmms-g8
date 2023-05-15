@@ -1,6 +1,6 @@
 <div class="relative mx-3">
     <div class="flex justify-center">
-        <img src="{{$item->item_photo_path}}" alt="item image" class="w-38 h-38 rounded-lg">
+        <img src="{{ asset($item->item_photo_path) }}" alt="item image" class="w-38 h-38 rounded-lg">
     </div>
     <div class="flex width-full items-center justify-between px-2 mt-2">
         <span class="text-md font-bold">{{$item->item_name}}</span>
