@@ -41,8 +41,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('/item/filter', [ItemController::class, 'filter'])->name('item.filter');
+
     Route::resource('item', ItemController::class)
         ->missing(function (Request $request) {
+            dd($request);
             return Redirect::route('item.index'); // invoked if not be found for any of the resource's route
         });
 });
