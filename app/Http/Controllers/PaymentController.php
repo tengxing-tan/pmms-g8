@@ -13,7 +13,7 @@ class PaymentController extends Controller
     public function items() {
 
         return view('PaymentView.items', [
-            'items' => Item::latest()->filter(request(['search']))->get()
+            'items' => Item::filter(request(['search']))->get()
         ]);
     }
 
@@ -61,6 +61,7 @@ class PaymentController extends Controller
                     'id' => $i, 
                     'quantity' => $request[$i]
                 ]);
+                Item::where('id', $i)->update(['quantity' => $item->quantity - $request[$i]]); 
             }
         }
 

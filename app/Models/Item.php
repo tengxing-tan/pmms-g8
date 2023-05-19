@@ -31,7 +31,7 @@ class Item extends Model
 
     public function scopeFilter($query, array $filters) {
         if ($filters['search'] ?? false) {
-            $query->where('item_name', 'like', '%', request('search'), '%'); 
+            $query->where('item_name', 'like', '%'. request('search'). '%'); 
         }            // $query->where('id', 'like', '%', request('id'), '%'); 
     }
 
