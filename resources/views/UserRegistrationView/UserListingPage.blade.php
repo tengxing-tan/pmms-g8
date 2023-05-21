@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-slot:title>User List</x-slot>
 
+
+
     <div class="p-6 w-full max-w-4xl mx-auto" x-data="{ openPopMesg: true }">
         <!-- success message -->
         @if ($message = Session::get('success'))
@@ -26,6 +28,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Email address</th>
+                        <th>Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -38,8 +41,17 @@
                         <td>{{$i++}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>
+                            @if(!empty($user->getRoleNames()))
+                              @foreach($user->getRoleNames() as $v)
+                                {{ $v }}
+                                 {{-- <label class="badge badge-success">{{ $v }}</label> --}}
+                              @endforeach
+                            @endif
+                          </td>
                         <td><a href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">Edit</a> |
                             <a href="{{url('delete-user/'.$user->id)}}" class="btn btn-danger">Delete</a>
+
                         </td>
                     </tr>
 

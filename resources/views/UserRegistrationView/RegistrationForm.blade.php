@@ -33,6 +33,20 @@
                 </div>
                 @enderror
             </div><br>
+            <div class="md-3">
+                <label for="roles">Roles</label>
+                    @foreach($roles as $role)
+                        <div>
+                            <input type="checkbox" name="roles[]" value="{{ $role->id }}"> {{ $role->name }}
+                        </div>
+                    @endforeach
+                    @error('roles[]')
+                    <div class="alert alert-danger" role="alert">
+                        {{$message}}
+                    </div>
+                    @enderror
+            </div><br>
+
             <div class="flex">
                 <button class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded" >Save</button>
                 <button class="block cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-500 font-medium p-2 px-4 rounded"><a href="{{url('user-listing')}}" >Back</a></button>
