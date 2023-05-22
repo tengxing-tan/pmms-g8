@@ -6,6 +6,8 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\DutyRosterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +50,8 @@ Route::middleware([
 
 // Route to cashier main view
 Route::get('/items', [PaymentController::class, 'index'])->name('items');
+
+
+Route::get('/adminRoster', 'App\Http\Controllers\DutyRosterController@showAdminRoster')->name('AdminRoster');
+Route::post('/adminRoster', 'App\Http\Controllers\DutyRosterController@createRoster')->name('Saved');
+Route::get('/newRoster', 'App\Http\Controllers\DutyRosterController@newRoster')->name('NewRoster');
