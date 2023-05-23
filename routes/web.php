@@ -58,7 +58,7 @@ Route::middleware([
     Route::post('save-announcement', [AnnouncementController::class, 'store']);
     Route::get('edit-announcement/{id}', [AnnouncementController::class, 'edit']);
     Route::post('update-announcement', [AnnouncementController::class, 'update']);
-    Route::get('delete-announcement/{id}', [AnnouncementController::class, 'destroy']);
+    Route::delete('delete-announcement/{id}', [AnnouncementController::class, 'destroy']);
 
     Route::get('user-listing', [UserController::class, 'index'])->name('user-listing');
     Route::get('create-user', [UserController::class, 'create']);
@@ -66,7 +66,7 @@ Route::middleware([
     Route::get('edit-user/{id}', [UserController::class, 'edit']);
     // Route::post('update-user', [UserController::class, 'update']);
     Route::put('update-user/{id}', [UserController::class, 'update']);
-    Route::get('delete-user/{id}', [UserController::class, 'destroy']);
+    Route::delete('delete-user/{id}', [UserController::class, 'destroy']);
 
     Route::resource('item', ItemController::class)
         ->missing(function (Request $request) {
