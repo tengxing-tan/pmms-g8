@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->id();
             $table->date('roster_date');
+            $table->string('day_of_week')->nullable();
             $table->time('roster_start_time');
             $table->time('roster_end_time');
             $table->unsignedBigInteger('weekly_roster_id');

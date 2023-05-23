@@ -73,17 +73,19 @@ class DutyRosterController extends Controller
         //     $dailyRoster->roster_end_time = $endTimes[$key];
         //     $weeklyRoster->dailyRosters()->save($dailyRoster);
         // }
-        
+
         foreach ($dates as $key => $date) {
             $dailyRoster = new DailyRoster();
             $dailyRoster->roster_date = $date;
             $dailyRoster->roster_start_time = $startTimes[$key];
             $dailyRoster->roster_end_time = $endTimes[$key];
+            $dailyRoster->day_of_week = Carbon::parse($date)->format('l'); // Set the day_of_week based on the submitted date
             $weeklyRoster->dailyRosters()->save($dailyRoster);
-
+        
             // Generate and save slots for the current daily roster
             $this->generateTimeSlots($dailyRoster, $startTimes[$key], $endTimes[$key]);
         }
+        
         return redirect()->route('Saved')->with('success', 'Weekly roster created successfully.');
     }
 

@@ -3,76 +3,104 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include the Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .roster {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        /* Custom styles */
+        .input-label {
+            font-weight: 600;
         }
-        h1{
-            text-align: center;
+
+        .input-field {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #E2E8F0;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        .error-message {
+            color: #EF4444;
+            font-size: 0.875rem;
+        }
+
+        .submit-button {
+            padding: 0.75rem 2rem;
+            border-radius: 0.375rem;
+            background-color: #2563EB;
+            color: #FFFFFF;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #1D4ED8;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100">
 
-<h1>Create Weekly Roster</h1>
-<div class="roster">
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+<h1 class="text-3xl font-bold text-center mt-8">Create Weekly Roster</h1>
 
-<form method="POST" action="/adminRoster">
-    @csrf
-    <div id="daily-rosters-container">
-        <table class="table-roster">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="daily-roster">
-                    <td>
-                        <div class="form-group">
-                            <input type="date" name="date[]" required>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input type="time" name="startTime[]" required>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input type="time" name="endTime[]" required>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <button type="button" class="delete-roster-button" onclick="deleteRoster(this)">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <hr>
-    <button type="button" id="add-roster-button">Add Daily Roster</button>
-    <button type="submit" class="btn btn-primary">Create Weekly Roster</button>
-</form>
+<div class="flex justify-center items-center min-h-screen">
+    @if ($errors->any())
+        <div class="bg-red-100 text-red-500 rounded p-4 mb-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form method="POST" action="/adminRoster" class="w-2/3 bg-white shadow-md rounded p-8">
+        @csrf
+        <div id="daily-rosters-container">
+            <table class="w-full">
+                <thead>
+                    <tr>
+                        <th class="input-label">Date</th>
+                        <th class="input-label">Start Time</th>
+                        <th class="input-label">End Time</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="daily-roster">
+                        <td>
+                            <div class="form-group">
+                                <input type="date" name="date[]" required class="input-field w-full">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="time" name="startTime[]" required class="input-field w-full">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="time" name="endTime[]" required class="input-field w-full">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <button type="button" class="delete-roster-button" onclick="deleteRoster(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr class="my-6">
+        <button type="button" id="add-roster-button" class="mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded">Add Daily Roster</button></br></br></br></br>
+        <button type="submit" class="submit-button">Create Weekly Roster</button>
+    </form>
+</div>
 
 <script>
     $(document).ready(function () {
@@ -87,17 +115,17 @@
                     <tr class="daily-roster">
                         <td>
                             <div class="form-group">
-                                <input type="date" name="date[]" required>
+                                <input type="date" name="date[]" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="startTime[]" required>
+                                <input type="time" name="startTime[]" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="endTime[]" required>
+                                <input type="time" name="endTime[]" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
@@ -125,5 +153,5 @@
         }
     });
 </script>
-</div>
+
 </body>
