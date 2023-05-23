@@ -38,8 +38,8 @@ class AnnouncementController extends Controller
         $ann->description = $description;
         $ann->save();
 
-        return redirect()->back()->with('success','Announcement Added Successfully');
-        //return redirect(url('admin-announcement-list'));
+        // return redirect()->back()->with('success','Announcement Added Successfully');
+        return redirect(url('admin-announcement-list'))->with('success','Announcement Added Successfully');
     }
 
     public function edit($id)
@@ -66,7 +66,7 @@ class AnnouncementController extends Controller
         ]);
 
         //return redirect(url('announcement-list'));
-        return redirect()->back()->with('success','Announcement Updated Successfully');
+        return redirect(url('admin-announcement-list'))->with('success','Announcement Updated Successfully');
     }
 
     public function destroy($id)
