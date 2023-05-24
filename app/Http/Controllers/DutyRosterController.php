@@ -20,7 +20,15 @@ class DutyRosterController extends Controller
 
     public function showAdminRoster()
     {
-        return view('DutyRosterView.AdminRosterPage');
+        // Retrieve the latest weekly roster
+        $weeklyRoster = WeeklyRoster::latest()->first();
+
+        if ($weeklyRoster) {
+            // Load the daily rosters and their slots with user information
+            $weeklyRoster->load('dailyRosters.slot.users');
+        }
+        
+        return view('DutyRosterView.AdminRosterPage', compact('weeklyRoster'));
     }
 
     public function newRoster()
@@ -113,6 +121,28 @@ class DutyRosterController extends Controller
     
             $startTime->addMinutes($interval); // Move to the next slot start time
         }
+    }
+
+    public function addSlot($slotId)
+    {
+        $user = Auth::user();
+        $slot = Slot::find($slotId);
+
+        if ($user->slot()->count() < 2 && !$user->slot()->where('slot_id', $slotId)->exists()) {
+            $user->slot()->attach($slot);
+            return response()->json(['message' => 'Slot added to the timetable successfully']);
+        } else {
+            return response()->json(['message' => 'Unable to add slot to the timetable']);
+        }
+    }
+
+    public function deleteTimeSlot($slotId)
+    {
+        $user = Auth::user();
+        $slot = Slot::find($slotId);
+
+        $user->slot()->detach($slot);
+        return response()->json(['message' => 'Slot removed from the timetable successfully']);
     }
 
 
