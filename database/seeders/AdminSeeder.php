@@ -14,9 +14,9 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('admin1234'),
+            'name' => 'AdminCommittee',
+            'email' => 'adminCommittee@example.com',
+            'password' => bcrypt('ac1234'),
         ])->assignRole('admin','committee');
 
         User::create([
@@ -26,10 +26,16 @@ class AdminSeeder extends Seeder
         ])->assignRole('committee');
 
         User::create([
-            'name' => 'Cashier',
-            'email' => 'cashier@example.com',
-            'password' => bcrypt('cas1234'),
-        ])->assignRole('cashier');
+            'name' => 'CashierCommittee',
+            'email' => 'cashierCommittee@example.com',
+            'password' => bcrypt('cc1234'),
+        ])->assignRole('cashier','committee');
+
+        User::create([
+            'name' => 'Coordinator',
+            'email' => 'coordinator@example.com',
+            'password' => bcrypt('coor1234'),
+        ])->assignRole('coordinator');
 
     }
 }

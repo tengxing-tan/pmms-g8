@@ -20,21 +20,15 @@ class DatabaseSeeder extends Seeder
     {
 
         Item::factory(15)->create();
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Admin',
-        //     'email' => 'test@example.com',
-        //     'password' => bcrypt('test1234'),
-        // ]);
-        // \App\Models\User::factory()->create([
-        //     'name' => 'User',
-        //     'email' => 'user@user.com',
-        //     'password' => bcrypt('12345678'),
-        // ]);
+
 
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
 
-        Announcement::factory(5)->create();
+        Announcement::create([
+            'title' => 'PETAKOM Mart is closed!',
+            'description' => 'Closed on 1 May 2023',
+        ]);
         Item::factory(10)->create();
         Payment::factory(10)->create();
         PaymentDetail::factory(20)->create();

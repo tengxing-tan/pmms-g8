@@ -35,15 +35,17 @@ Route::middleware([
 
         // Redirect based on user role
         if ($user->hasRole('admin')) {
-            return redirect()->route('admin-announcement-list');
-        } elseif ($user->hasRole('committee')) {
-            return redirect()->route('committee-announcement-list');
-        } else {
+            return redirect()->route('item.index');
+        } elseif ($user->hasRole('cashier')) {
             return redirect()->route('items');
+        } elseif ($user->hasRole('committee')) {
+            return redirect()->route('announcement-list');
+        } else{
+            return redirect()->route('report');
         }
     })->name('dashboard');
 
-    Route::get('/item/filter', [ItemController::class, 'filter'])->name('item.filter');
+
     // Other routes
 });
 
@@ -66,10 +68,58 @@ Route::middleware([
     Route::get('create-user', [UserController::class, 'create']);
     Route::post('save-user', [UserController::class, 'store']);
     Route::get('edit-user/{id}', [UserController::class, 'edit']);
-    // Route::post('update-user', [UserController::class, 'update']);
     Route::put('update-user/{id}', [UserController::class, 'update']);
     Route::delete('delete-user/{id}', [UserController::class, 'destroy']);
 
+
+});
+
+
+Route::middleware([
+    'auth:sanctum',
+    'role:cashier',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+
+    // Route to cashier main view
+    Route::get('/items', [PaymentController::class, 'items'])->name('items');
+
+    //Route to payment view
+    Route::post('/payment', [PaymentController::class, 'payment']);
+
+    //Route to receipt view
+    Route::post('/receipt', [PaymentController::class, 'receipt']);
+});
+
+Route::middleware([
+    'auth:sanctum',
+    'role:coordinator',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+
+    Route::get('/report', [ReportController::class, 'report'])->name('report');
+
+});
+
+Route::middleware([
+    'auth:sanctum',
+    'role:committee|coordinator', // Allow both committee and coordinator roles
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('announcement-list', [AnnouncementController::class, 'indexCommitteeAnnouncement'])->name('announcement-list');
+    Route::get('view-announcement/{id}', [AnnouncementController::class, 'show']);
+});
+
+Route::middleware([
+    'auth:sanctum',
+    'role:admin|cashier', // Allow both admin and cashier roles
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/item/filter', [ItemController::class, 'filter'])->name('item.filter');
     Route::resource('item', ItemController::class)
         ->missing(function (Request $request) {
             dd($request);
@@ -77,20 +127,10 @@ Route::middleware([
 
         });
 
-    // Route to cashier main view
-    Route::get('/items', [PaymentController::class, 'index'])->name('items');
-
-    Route::get('committee-announcement-list', [AnnouncementController::class, 'indexCommitteeAnnouncement'])->name('committee-announcement-list');
-    Route::get('view-announcement/{id}', [AnnouncementController::class, 'show']);
 });
 
-// Route to cashier main view
-Route::get('/items', [PaymentController::class, 'items'])->name('items');
 
-//Route to payment view
-Route::post('/payment', [PaymentController::class, 'payment']);
 
-//Route to receipt view
-Route::post('/receipt', [PaymentController::class, 'receipt']);
 
-Route::get('/report', [ReportController::class, 'report'])->name('report');
+
+

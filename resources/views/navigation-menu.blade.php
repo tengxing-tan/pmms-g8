@@ -23,9 +23,6 @@
                     <x-nav-link href="{{ route('admin-announcement-list') }}" :active="request()->routeIs('admin-announcement-list')">
                         {{ __('Announcement') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('report') }}" :active="request()->routeIs('report')">
-                        {{ __('Report') }}
-                    </x-nav-link>
                     <x-nav-link href="{{ route('user-listing') }}" :active="request()->routeIs('user-listing')">
                         {{ __('User') }}
                     </x-nav-link>
@@ -34,9 +31,20 @@
                     <x-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
                         {{ __('Payment') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('item.index') }}" :active="request()->routeIs('item.*')">
+                        {{ __('Inventory') }}
+                    </x-nav-link>
                     @endrole
                     @role('committee')
-                    <x-nav-link href="{{ route('committee-announcement-list') }}" :active="request()->routeIs('committee-announcement-list')">
+                    <x-nav-link href="{{ route('announcement-list') }}" :active="request()->routeIs('announcement-list')">
+                        {{ __('Announcement Board') }}
+                    </x-nav-link>
+                    @endrole
+                    @role('coordinator')
+                    <x-nav-link href="{{ route('report') }}" :active="request()->routeIs('report')">
+                        {{ __('Report') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('announcement-list') }}" :active="request()->routeIs('announcement-list')">
                         {{ __('Announcement Board') }}
                     </x-nav-link>
                     @endrole

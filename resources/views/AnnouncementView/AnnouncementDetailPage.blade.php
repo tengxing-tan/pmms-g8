@@ -21,7 +21,7 @@
                         <br>
 
                         <div class="flex">
-                            <button class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded"><a href="{{url('committee-announcement-list')}}" >Back</a></button>
+                            <button class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded"><a href="{{url('announcement-list')}}" >Back</a></button>
                         </div>
 
                     </div>
