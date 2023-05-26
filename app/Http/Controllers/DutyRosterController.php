@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\WeeklyRoster;
 use App\Models\DailyRoster;
 use App\Models\Slot;
+use Illuminate\Support\Facades\Auth;
 
 class DutyRosterController extends Controller
 {
@@ -50,7 +51,7 @@ class DutyRosterController extends Controller
             'startTime' => 'required|array',
             'startTime.*' => 'date_format:H:i',
             'endTime' => 'required|array',
-            'endTime.*' => 'date_format:H:i',
+            'endTime.*' => 'date_format:H:i|after:startTime.*',
         ]);
 
         $weeklyRoster = new WeeklyRoster();
@@ -97,6 +98,7 @@ class DutyRosterController extends Controller
         return redirect()->route('Saved')->with('success', 'Weekly roster created successfully.');
     }
 
+
     
 
     private function generateTimeSlots(DailyRoster $dailyRoster, $startTime, $endTime)
@@ -123,8 +125,22 @@ class DutyRosterController extends Controller
         }
     }
 
-    public function addSlot($slotId)
-    {
+    public function showCommitteeRoster()
+{
+    // Retrieve the latest weekly roster
+    $weeklyRoster = WeeklyRoster::latest()->first();
+
+    if ($weeklyRoster) {
+        // Load the daily rosters and their slots with user information
+        $weeklyRoster->load('dailyRosters.slot.users');
+    }
+
+    return view('DutyRosterView.CommitteeRosterPage', compact('weeklyRoster'));
+}
+
+public function addSlot($slotId)
+{
+    if (Auth::check()) {
         $user = Auth::user();
         $slot = Slot::find($slotId);
 
@@ -134,47 +150,115 @@ class DutyRosterController extends Controller
         } else {
             return response()->json(['message' => 'Unable to add slot to the timetable']);
         }
+    } else {
+        return response()->json(['message' => 'User not authenticated']);
     }
+}
 
-    public function deleteTimeSlot($slotId)
+public function deleteTimeSlot($slotId)
+{
+    $user = Auth::user();
+    $slot = Slot::find($slotId);
+
+    $user->slot()->detach($slot);
+    return response()->json(['message' => 'Slot removed from the timetable successfully']);
+}
+
+    public function editRoster($id)
     {
-        $user = Auth::user();
-        $slot = Slot::find($slotId);
+        $weeklyRoster = WeeklyRoster::findOrFail($id);
 
-        $user->slot()->detach($slot);
-        return response()->json(['message' => 'Slot removed from the timetable successfully']);
+        return view('DutyRosterView.EditRosterPage', compact('weeklyRoster'));
     }
 
+    
+    public function updateRoster(Request $request, $id)
+{
+    $weeklyRoster = WeeklyRoster::findOrFail($id);
 
-    public function edit($id)
-    {
-        // Retrieve the weekly roster entry to be edited
-        $roster = WeeklyRoster::findOrFail($id);
+    // Get the request data
+    $requestData = $request->all();
 
-        return view('weekly-roster.edit', compact('roster'));
+    // Update the daily rosters
+    $dailyRosters = [];
+    $errors = [];
+
+    foreach ($requestData['date'] as $index => $date) {
+        $startTimeInput = $requestData['startTime'][$index];
+        $endTimeInput = $requestData['endTime'][$index];
+
+        // Convert input values to match database format (H:i:00)
+        $startTime = date('H:i:s', strtotime($startTimeInput));
+        $endTime = date('H:i:s', strtotime($endTimeInput));
+
+        // Perform the validation
+        if (!empty($startTime) && !preg_match('/^\d{2}:\d{2}:\d{2}$/', $startTime)) {
+            $errors[] = 'The startTime.' . $index . ' field must match the format H:i:s.';
+        }
+
+        if (!empty($endTime) && !preg_match('/^\d{2}:\d{2}:\d{2}$/', $endTime)) {
+            $errors[] = 'The endTime.' . $index . ' field must match the format H:i:s.';
+        }
+
+        if (!empty($startTime) && !empty($endTime) && $endTime <= $startTime) {
+            $errors[] = 'The endTime.' . $index . ' field must be a time after startTime.' . $index . '.';
+        }
+
+        // Save the daily roster data
+        $dailyRosters[] = [
+            'roster_date' => $date,
+            'roster_start_time' => $startTime,
+            'roster_end_time' => $endTime,
+        ];
     }
 
-    public function update(Request $request, $id)
-    {
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'date' => 'required|date',
-            'opening_time' => 'required',
-            'closing_time' => 'required|after:opening_time',
-        ]);
-
-        // Find the weekly roster entry to be updated
-        $roster = WeeklyRoster::findOrFail($id);
-        
-        // Update the roster details
-        $roster->date = $validatedData['date'];
-        $roster->opening_time = $validatedData['opening_time'];
-        $roster->closing_time = $validatedData['closing_time'];
-        // Update any other necessary fields
-        
-        // Save the changes
-        $roster->save();
-
-        return redirect()->route('weekly-roster.index')->with('success', 'Weekly roster updated successfully!');
+    if (!empty($errors)) {
+        // Redirect back with validation errors
+        return redirect()->back()->withErrors($errors);
     }
+
+    // Find the IDs of the daily rosters to delete slots
+    $rosterIdsToDelete = $weeklyRoster->dailyRosters->pluck('id')->toArray();
+
+    // Delete the associated slots
+    Slot::whereIn('daily_roster_id', $rosterIdsToDelete)->delete();
+
+    // Delete existing daily rosters
+    $weeklyRoster->dailyRosters()->delete();
+
+    // Create and save the updated daily rosters
+    foreach ($dailyRosters as $dailyRosterData) {
+        $dailyRoster = new DailyRoster($dailyRosterData);
+        $dailyRoster->day_of_week = Carbon::parse($dailyRosterData['roster_date'])->format('l');
+        $weeklyRoster->dailyRosters()->save($dailyRoster);
+
+        // Generate and save slots for the current daily roster
+        $this->generateTimeSlots($dailyRoster, $dailyRosterData['roster_start_time'], $dailyRosterData['roster_end_time']);
+    }
+
+    return redirect()->route('AdminRoster')->with('success', 'Weekly roster updated successfully.');
+}
+
+
+
+
+public function deleteRoster($id)
+{
+    $roster = WeeklyRoster::findOrFail($id);
+
+    // Delete the related slots
+    $roster->dailyRosters()->each(function ($dailyRoster) {
+        $dailyRoster->slot()->delete();
+    });
+
+    // Delete the related daily rosters
+    $roster->dailyRosters()->delete();
+
+    // Delete the selected weekly roster
+    $roster->delete();
+
+    return redirect()->route('AdminRoster')->with('success', 'Weekly roster deleted successfully.');
+}
+
+
 }

@@ -46,16 +46,7 @@
 <h1 class="text-3xl font-bold text-center mt-8">Create Weekly Roster</h1>
 
 <div class="flex justify-center items-center min-h-screen">
-    @if ($errors->any())
-        <div class="bg-red-100 text-red-500 rounded p-4 mb-4">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
+    
     <form method="POST" action="/adminRoster" class="w-2/3 bg-white shadow-md rounded p-8">
         @csrf
         <div id="daily-rosters-container">
@@ -77,12 +68,12 @@
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="startTime[]" required class="input-field w-full">
+                                <input type="time" name="startTime[]" value="{{ old('startTime', '09:00') }}" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="endTime[]" required class="input-field w-full">
+                                <input type="time" name="endTime[]" value="{{ old('endTime', '17:00') }}" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
@@ -95,10 +86,19 @@
                     </tr>
                 </tbody>
             </table>
+            @if ($errors->any())
+                <div class="bg-red-100 text-red-500 rounded p-4 mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <hr class="my-6">
-        <button type="button" id="add-roster-button" class="mr-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded">Add Daily Roster</button></br></br></br></br>
-        <button type="submit" class="submit-button">Create Weekly Roster</button>
+        <button type="button" id="add-roster-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Add Daily Roster</button></br></br></br></br>
+        <button type="submit" id="submit-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Create Weekly Roster</button>
     </form>
 </div>
 
@@ -120,12 +120,12 @@
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="startTime[]" required class="input-field w-full">
+                                <input type="time" name="startTime[]" value="{{ old('startTime', '09:00') }}" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="endTime[]" required class="input-field w-full">
+                                <input type="time" name="endTime[]" value="{{ old('endTime', '17:00') }}" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
