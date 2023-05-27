@@ -21,17 +21,15 @@ class DutyRosterController extends Controller
     }
 
     public function showAdminRoster()
-    {
-        // Retrieve the latest weekly roster
-        $weeklyRoster = WeeklyRoster::latest()->first();
+{
+    // Retrieve all the weekly rosters in descending order
+    $weeklyRosters = WeeklyRoster::orderBy('created_at', 'desc')->get();
 
-        if ($weeklyRoster) {
-            // Load the daily rosters and their slots with user information
-            $weeklyRoster->load('dailyRosters.slot.users');
-        }
-        
-        return view('DutyRosterView.AdminRosterPage', compact('weeklyRoster'));
-    }
+    // Load the daily rosters and their slots with user information for all weekly rosters
+    $weeklyRosters->load('dailyRosters.slot.users');
+
+    return view('DutyRosterView.AdminRosterPage', compact('weeklyRosters'));
+}
 
     public function newRoster()
     {
@@ -141,16 +139,10 @@ class DutyRosterController extends Controller
 
     public function showCoordinatorRoster()
     {
-        // Retrieve the latest weekly roster
-        $weeklyRoster = WeeklyRoster::latest()->first();
-
-        if ($weeklyRoster) {
-            // Load the daily rosters and their slots with user information
-            $weeklyRoster->load('dailyRosters.slot.users');
-        }
-        
-        return view('DutyRosterView.CoordinatorRosterPage', compact('weeklyRoster'));
+        $weeklyRosters = WeeklyRoster::with('dailyRosters.slot.users')->get();
+        return view('DutyRosterView.CoordinatorRosterPage', compact('weeklyRosters'));
     }
+
 
     public function addSlot($slotId)
     {
@@ -288,13 +280,14 @@ class DutyRosterController extends Controller
     {
         $user = auth()->user();
         
-        // Retrieve the weekly rosters that have slots assigned to the authenticated user
+        // Retrieve the weekly rosters that have slots assigned to the authenticated user, ordered by the creation timestamp in descending order
         $userSchedule = WeeklyRoster::whereHas('dailyRosters.slot.users', function ($query) use ($user) {
             $query->where('users.id', $user->id);
-        })->get();
+        })->orderBy('created_at', 'desc')->get();
         
-        return view('DutyRosterView.SchedulePage', ['userSchedule' => $userSchedule]);
+        return view('DutyRosterView.SchedulePage', compact('userSchedule'));
     }
+
 
     public function deleteTimeSlot($slotId)
 {
