@@ -12,14 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('daily_rosters', function (Blueprint $table) {
-            // $table->unsignedBigInteger('daily_roster_id');
-            // $table->date('roster_date');
-            // $table->time('roster_start_time');
-            // $table->time('roster_end_time');
-            // $table->unsignedBigInteger('weekly_roster_id');
-            // $table->foreign('weekly_roster_id')->references('id')->on('weekly_rosters');
-            // $table->timestamps();
-
+      
             $table->id();
             $table->date('roster_date');
             $table->string('day_of_week')->nullable();

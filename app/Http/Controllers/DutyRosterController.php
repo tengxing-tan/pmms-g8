@@ -38,12 +38,7 @@ class DutyRosterController extends Controller
 
     public function createRoster(Request $request)
     {
-        // Validate the form input
-        // $validatedData = $request->validate([
-        //     'date' => 'required|date',
-        //     'startTime' => 'required|time',
-        //     'endTime' => 'required|time',
-        // ]);
+
         $request->validate([
             'date' => 'required|array',
             'date.*' => 'date',
@@ -54,9 +49,7 @@ class DutyRosterController extends Controller
         ]);
 
         $weeklyRoster = new WeeklyRoster();
-        // $weeklyRoster->date = $request->input('date');
-        // $weeklyRoster->startTime = $request->input('startTime');
-        // $weeklyRoster->endTime = $request->input('endTime');
+       
         $weeklyRoster->save();
 
     // // Save the roster to the database
@@ -74,13 +67,7 @@ class DutyRosterController extends Controller
         // dd($dates);
         // dd($startTimes);
         // dd($endTimes);
-        // foreach ($dates as $key => $date) {
-        //     $dailyRoster = new DailyRoster();
-        //     $dailyRoster->roster_date = $dates;
-        //     $dailyRoster->roster_start_time = $startTimes[$key];
-        //     $dailyRoster->roster_end_time = $endTimes[$key];
-        //     $weeklyRoster->dailyRosters()->save($dailyRoster);
-        // }
+       
 
         foreach ($dates as $key => $date) {
             $dailyRoster = new DailyRoster();

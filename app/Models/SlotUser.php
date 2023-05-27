@@ -10,7 +10,6 @@ class SlotUser extends Model
     use HasFactory;
     protected $table = 'slot_user';
 
-    // Define relationships with other models, if needed
     public function slot()
     {
         return $this->belongsTo(Slot::class);
