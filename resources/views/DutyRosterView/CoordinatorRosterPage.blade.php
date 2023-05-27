@@ -8,17 +8,10 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-bold text-center">LATEST DUTY ROSTER</h1>
+        <h1 class="text-3xl font-bold text-center mt-8">LATEST DUTY ROSTER</h1>
         <p class="text-green-500">{{ session('success') }}</p>
-        </br>
-        <form action="{{ route('NewRoster') }}" method="GET">
-            @csrf
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                + NEW
-            </button>
-        </form>
 
-        @if(isset($weeklyRoster) && $weeklyRoster->dailyRosters->count() > 0)
+        @if(isset($weeklyRoster))
             @php
                 $firstDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->min('roster_date'))->format('j F Y');
                 $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
@@ -73,16 +66,7 @@
                 </tbody>
             </table>
             </br>
-            <div class="flex justify-end mt-4">
-                <a href="{{ route('editRoster', $weeklyRoster->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Edit</a>
-                <div class="ml-4"></div>
-                <!-- Delete Button -->
-                <form action="{{ route('deleteRoster', $weeklyRoster->id) }}" method="POST" class="ml-2">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded" onclick="return confirm('Are you sure you want to delete this weekly roster?')">Delete</button>
-                </form>
-            </div>
+
         @else
             <p class="mt-4">No weekly roster available.</p>
         @endif

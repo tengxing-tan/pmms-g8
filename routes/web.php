@@ -54,6 +54,7 @@ Route::get('/items', [PaymentController::class, 'index'])->name('items');
 
 Route::get('/adminRoster', 'App\Http\Controllers\DutyRosterController@showAdminRoster')->name('AdminRoster');
 Route::post('/adminRoster', 'App\Http\Controllers\DutyRosterController@createRoster')->name('Saved');
+Route::get('/coordinatorRoster', 'App\Http\Controllers\DutyRosterController@showCoordinatorRoster')->name('CoordinatorRoster');
 Route::get('/newRoster', 'App\Http\Controllers\DutyRosterController@newRoster')->name('NewRoster');
 Route::get('/cmtRoster', 'App\Http\Controllers\DutyRosterController@showCommitteeRoster')->name('cmtRoster');
 Route::post('/add-slot/{slotId}', 'App\Http\Controllers\DutyRosterController@addSlot')->name('addSlot');

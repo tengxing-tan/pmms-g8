@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
-        <h1 class="text-2xl font-bold mb-4">Latest Duty Roster</h1>
+        <h1 class="text-3xl font-bold text-center">LATEST DUTY ROSTER</h1>
         <p class="text-green-500">{{ session('success') }}</p>
 
         @if(isset($weeklyRoster))

@@ -8,6 +8,7 @@ use App\Models\WeeklyRoster;
 use App\Models\DailyRoster;
 use App\Models\Slot;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DutyRosterController extends Controller
 {
@@ -138,6 +139,19 @@ class DutyRosterController extends Controller
         return view('DutyRosterView.CommitteeRosterPage', compact('weeklyRoster'));
     }
 
+    public function showCoordinatorRoster()
+    {
+        // Retrieve the latest weekly roster
+        $weeklyRoster = WeeklyRoster::latest()->first();
+
+        if ($weeklyRoster) {
+            // Load the daily rosters and their slots with user information
+            $weeklyRoster->load('dailyRosters.slot.users');
+        }
+        
+        return view('DutyRosterView.CoordinatorRosterPage', compact('weeklyRoster'));
+    }
+
     public function addSlot($slotId)
     {
         if (Auth::check()) {
@@ -173,72 +187,82 @@ class DutyRosterController extends Controller
 
         
         public function updateRoster(Request $request, $id)
-    {
-        $weeklyRoster = WeeklyRoster::findOrFail($id);
-
-        // Get the request data
-        $requestData = $request->all();
-
-        // Update the daily rosters
-        $dailyRosters = [];
-        $errors = [];
-
-        foreach ($requestData['date'] as $index => $date) {
-            $startTimeInput = $requestData['startTime'][$index];
-            $endTimeInput = $requestData['endTime'][$index];
-
-            // Convert input values to match database format (H:i:00)
-            $startTime = date('H:i:s', strtotime($startTimeInput));
-            $endTime = date('H:i:s', strtotime($endTimeInput));
-
-            // Perform the validation
-            if (!empty($startTime) && !preg_match('/^\d{2}:\d{2}:\d{2}$/', $startTime)) {
-                $errors[] = 'The startTime.' . $index . ' field must match the format H:i:s.';
+        {
+            $weeklyRoster = WeeklyRoster::findOrFail($id);
+        
+            // Get the request data
+            $requestData = $request->all();
+        
+            // Update the daily rosters
+            $dailyRosters = [];
+            $errors = [];
+        
+            foreach ($requestData['date'] as $index => $date) {
+                $startTimeInput = $requestData['startTime'][$index];
+                $endTimeInput = $requestData['endTime'][$index];
+    
+                // Convert input values to match database format (H:i:00)
+                $startTime = date('H:i:s', strtotime($startTimeInput));
+                $endTime = date('H:i:s', strtotime($endTimeInput));
+    
+                // Perform the validation
+                if (!empty($startTime) && !preg_match('/^\d{2}:\d{2}:\d{2}$/', $startTime)) {
+                    $errors[] = 'The startTime.' . $index . ' field must match the format H:i:s.';
+                }
+    
+                if (!empty($endTime) && !preg_match('/^\d{2}:\d{2}:\d{2}$/', $endTime)) {
+                    $errors[] = 'The endTime.' . $index . ' field must match the format H:i:s.';
+                }
+    
+                if (!empty($startTime) && !empty($endTime) && $endTime <= $startTime) {
+                    $errors[] = 'The endTime.' . $index . ' field must be a time after startTime.' . $index . '.';
+                }
+    
+                // Save the daily roster data
+                $dailyRosters[] = [
+                    'roster_date' => $date,
+                    'roster_start_time' => $startTime,
+                    'roster_end_time' => $endTime,
+                ];
             }
-
-            if (!empty($endTime) && !preg_match('/^\d{2}:\d{2}:\d{2}$/', $endTime)) {
-                $errors[] = 'The endTime.' . $index . ' field must match the format H:i:s.';
+            
+        
+            if (!empty($errors)) {
+                // Redirect back with validation errors
+                return redirect()->back()->withErrors($errors);
             }
-
-            if (!empty($startTime) && !empty($endTime) && $endTime <= $startTime) {
-                $errors[] = 'The endTime.' . $index . ' field must be a time after startTime.' . $index . '.';
+        
+            // Find the IDs of the daily rosters to delete slots
+            $rosterIdsToDelete = $weeklyRoster->dailyRosters->pluck('id')->toArray();
+        
+            // Retrieve the IDs of the slots associated with the daily rosters to be deleted
+            $slotIdsToDelete = Slot::whereIn('daily_roster_id', $rosterIdsToDelete)->pluck('id')->toArray();
+        
+            // Retrieve the IDs of the slot_user records associated with the slots
+            $slotUserIdsToDelete = DB::table('slot_user')->whereIn('slot_id', $slotIdsToDelete)->pluck('slot_id')->toArray();
+        
+            // Delete the slot_user records
+            DB::table('slot_user')->whereIn('slot_id', $slotUserIdsToDelete)->delete();
+        
+            // Delete the slots
+            Slot::whereIn('id', $slotIdsToDelete)->delete();
+        
+            // Delete existing daily rosters
+            $weeklyRoster->dailyRosters()->delete();
+        
+            // Create and save the updated daily rosters
+            foreach ($dailyRosters as $dailyRosterData) {
+                $dailyRoster = new DailyRoster($dailyRosterData);
+                $dailyRoster->day_of_week = Carbon::parse($dailyRosterData['roster_date'])->format('l');
+                $weeklyRoster->dailyRosters()->save($dailyRoster);
+    
+                // Generate and save slots for the current daily roster
+                $this->generateTimeSlots($dailyRoster, $dailyRosterData['roster_start_time'], $dailyRosterData['roster_end_time']);
             }
-
-            // Save the daily roster data
-            $dailyRosters[] = [
-                'roster_date' => $date,
-                'roster_start_time' => $startTime,
-                'roster_end_time' => $endTime,
-            ];
+        
+            return redirect()->route('AdminRoster')->with('success', 'Weekly roster updated successfully.');
         }
-
-        if (!empty($errors)) {
-            // Redirect back with validation errors
-            return redirect()->back()->withErrors($errors);
-        }
-
-        // Find the IDs of the daily rosters to delete slots
-        $rosterIdsToDelete = $weeklyRoster->dailyRosters->pluck('id')->toArray();
-
-        // Delete the associated slots
-        Slot::whereIn('daily_roster_id', $rosterIdsToDelete)->delete();
-
-        // Delete existing daily rosters
-        $weeklyRoster->dailyRosters()->delete();
-
-        // Create and save the updated daily rosters
-        foreach ($dailyRosters as $dailyRosterData) {
-            $dailyRoster = new DailyRoster($dailyRosterData);
-            $dailyRoster->day_of_week = Carbon::parse($dailyRosterData['roster_date'])->format('l');
-            $weeklyRoster->dailyRosters()->save($dailyRoster);
-
-            // Generate and save slots for the current daily roster
-            $this->generateTimeSlots($dailyRoster, $dailyRosterData['roster_start_time'], $dailyRosterData['roster_end_time']);
-        }
-
-        return redirect()->route('AdminRoster')->with('success', 'Weekly roster updated successfully.');
-    }
-
+        
 
 
 

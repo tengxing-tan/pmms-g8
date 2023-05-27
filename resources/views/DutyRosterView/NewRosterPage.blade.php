@@ -42,14 +42,15 @@
     </style>
 </head>
 <body class="bg-gray-100">
-
-<h1 class="text-3xl font-bold text-center mt-8">Create Weekly Roster</h1>
+    </br>
+<h1 class="text-3xl font-bold text-center">Create Weekly Roster</h1>
 
 <div class="flex justify-center items-center min-h-screen">
-    
+   
     <form method="POST" action="/adminRoster" class="w-2/3 bg-white shadow-md rounded p-8">
         @csrf
         <div id="daily-rosters-container">
+             
             <table class="w-full">
                 <thead>
                     <tr>

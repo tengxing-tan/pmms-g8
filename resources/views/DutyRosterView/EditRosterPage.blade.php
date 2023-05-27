@@ -44,7 +44,7 @@
 </head>
 
 <body class="bg-gray-100">
-    <h1 class="text-3xl font-bold text-center mt-8">Edit Weekly Roster</h1>
+    <h1 class="text-3xl font-bold text-center">Edit Weekly Roster</h1>
 
     <div class="flex justify-center items-center min-h-screen">
         
