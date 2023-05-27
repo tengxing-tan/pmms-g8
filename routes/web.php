@@ -45,17 +45,14 @@ Route::middleware([
         }
     })->name('dashboard');
 
-
-    // Other routes
 });
 
 Route::middleware([
     'auth:sanctum',
-    'role:admin',
+    'role:admin', // Allow only admin roles
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-
 
     Route::get('admin-announcement-list', [AnnouncementController::class, 'index'])->name('admin-announcement-list');
     Route::get('create-announcement', [AnnouncementController::class, 'create']);
@@ -71,13 +68,12 @@ Route::middleware([
     Route::put('update-user/{id}', [UserController::class, 'update']);
     Route::delete('delete-user/{id}', [UserController::class, 'destroy']);
 
-
 });
 
 
 Route::middleware([
     'auth:sanctum',
-    'role:cashier',
+    'role:cashier', // Allow only cashier roles
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
@@ -94,7 +90,7 @@ Route::middleware([
 
 Route::middleware([
     'auth:sanctum',
-    'role:coordinator',
+    'role:coordinator', // Allow only coordinator roles
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
@@ -109,6 +105,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
     Route::get('announcement-list', [AnnouncementController::class, 'indexCommitteeAnnouncement'])->name('announcement-list');
     Route::get('view-announcement/{id}', [AnnouncementController::class, 'show']);
 });
@@ -119,6 +116,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
     Route::get('/item/filter', [ItemController::class, 'filter'])->name('item.filter');
     Route::resource('item', ItemController::class)
         ->missing(function (Request $request) {

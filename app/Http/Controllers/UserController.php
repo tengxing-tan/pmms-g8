@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
-use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index() //display all user
     {
 
         $users = User::get();
@@ -19,7 +18,7 @@ class UserController extends Controller
         return view('UserRegistrationView.UserListingPage', ["users" => $users]);
     }
 
-    public function create()
+    public function create()    //create new user
     {
 
         $roles = Role::get();
@@ -27,7 +26,7 @@ class UserController extends Controller
         return view('UserRegistrationView.RegistrationForm', ["roles" => $roles]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request) //save new user
     {
 
         $this->validate($request, [
@@ -45,46 +44,19 @@ class UserController extends Controller
 
         return redirect(url('user-listing'))->with('success','User Added Successfully');
 
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        //     'role' => 'required',
-        // ]);
-
-        // //dd($request->all());
-        // $name = $request->name;
-        // $email = $request->email;
-        // $password = $request->password;
-
-        // $user = new User();
-        // $user->name = $name;
-        // $user->email = $email;
-        // $user->password = $password;
-        // $user->save();
-
-        // $roles = $request->input('roles'); // array of selected role IDs
-
-        // $user->syncRoles($roles); // Assign roles to the user
-
-        // return redirect(url('user-listing'))->with('success','User Added Successfully');
     }
 
-    public function edit($id)
+    public function edit($id)   //get user info to be edited
     {
         $users = User::find($id);
         $roles = Role::get();
-        // $userRole = $users->roles->pluck('name','name')->all();
         $userRole = $users->roles->pluck('id')->toArray();
-
-        // dd($users);
-        // dd($userRole);
 
         return view('UserRegistrationView.EditUserForm',["users" => $users,"roles" => $roles,"userRole" => $userRole]);
 
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id)   //update user info
     {
         $this->validate($request, [
             'name' => 'required',
@@ -102,26 +74,9 @@ class UserController extends Controller
 
         return redirect(url('user-listing'))->with('success','User Updated Successfully');
 
-            //
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required',
-        // ]);
-
-        // $id = $request->id;
-        // $name = $request->name;
-        // $email = $request->email;
-        // $password = $request->password;
-
-        // User::where('id','=',$id)->update([
-        //     'name' => $name,
-        //     'email' => $email,
-        // ]);
-
-        // return redirect(url('user-listing'))->with('success','User Updated Successfully');
     }
 
-    public function destroy($id)
+    public function destroy($id)    //delete user
     {
         User::where('id','=',$id)->delete();
 
