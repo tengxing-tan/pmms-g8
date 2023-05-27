@@ -144,7 +144,9 @@ public function addSlot($slotId)
         $user = Auth::user();
         $slot = Slot::find($slotId);
 
-        if ($user->slot()->count() < 2 && !$user->slot()->where('slot_id', $slotId)->exists()) {
+        $userSlotsCount = $slot->users()->count(); // Count the number of users holding the slot
+
+        if ($userSlotsCount < 2 && !$slot->users()->where('user_id', $user->id)->exists()) {
             $user->slot()->attach($slot);
             return response()->json(['message' => 'Slot added to the timetable successfully']);
         } else {
@@ -154,6 +156,7 @@ public function addSlot($slotId)
         return response()->json(['message' => 'User not authenticated']);
     }
 }
+
 
 public function deleteTimeSlot($slotId)
 {
@@ -258,6 +261,18 @@ public function deleteRoster($id)
     $roster->delete();
 
     return redirect()->route('AdminRoster')->with('success', 'Weekly roster deleted successfully.');
+}
+
+public function showSchedule()
+{
+    $user = auth()->user();
+    
+    // Retrieve the weekly rosters that have slots assigned to the authenticated user
+    $userSchedule = WeeklyRoster::whereHas('dailyRosters.slot.users', function ($query) use ($user) {
+        $query->where('users.id', $user->id);
+    })->get();
+    
+    return view('DutyRosterView.SchedulePage', ['userSchedule' => $userSchedule]);
 }
 
 

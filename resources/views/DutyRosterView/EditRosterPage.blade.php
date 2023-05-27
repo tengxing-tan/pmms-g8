@@ -125,12 +125,12 @@
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="startTime[]" required class="input-field w-full">
+                                <input type="time" name="startTime[]" value="{{ old('startTime', '09:00') }}" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
                             <div class="form-group">
-                                <input type="time" name="endTime[]" required class="input-field w-full">
+                                <input type="time" name="endTime[]" value="{{ old('endTime', '17:00') }}" required class="input-field w-full">
                             </div>
                         </td>
                         <td>
