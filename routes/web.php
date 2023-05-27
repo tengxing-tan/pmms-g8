@@ -61,4 +61,4 @@ Route::get('/editRoster/{id}', 'App\Http\Controllers\DutyRosterController@editRo
 Route::put('/roster/{id}', 'App\Http\Controllers\DutyRosterController@updateRoster')->name('updateRoster');
 Route::delete('/roster/{id}', 'App\Http\Controllers\DutyRosterController@deleteRoster')->name('deleteRoster');
 Route::get('/schedule', 'App\Http\Controllers\DutyRosterController@showSchedule')->name('schedule');
-
+Route::delete('/slots/{slotId}', 'App\Http\Controllers\DutyRosterController@deleteTimeSlot')->name('deleteTimeSlot');

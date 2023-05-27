@@ -6,8 +6,10 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .table-container {
-            margin-top: 32px; /* Increase the margin-top value for more spacing */
+            margin-top: 16px; /* Increase the margin-top value for more spacing */
+            margin-bottom: 32px;
         }
+        
     </style>
 </head>
 <body class="bg-gray-100">
@@ -51,13 +53,15 @@
                                                 <div>{{ $startTime->format('h:i A') }} - {{ $endTime->format('h:i A') }}</div>
                                             </td>
                                             <td class="border py-2 px-4">
-                                                @foreach($slot->users as $user)
+                                                <!-- @foreach($slot->users as $user)
                                                     <div>{{ $user->name }}</div>
-                                                @endforeach
-                                                <form action="{{ route('addSlot', $slot->id) }}" method="POST">
+                                                @endforeach -->
+                                                <form id="deleteForm{{ $slot->id }}" action="{{ route('deleteTimeSlot', $slot->id) }}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
-                                                        Add Slot
+                                                    @method('DELETE')
+                                                    <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded"
+                                                        onclick="showConfirmation('{{ $slot->id }}')">
+                                                        DROP
                                                     </button>
                                                 </form>
                                             </td>
@@ -69,14 +73,32 @@
                     </table>
                 </div>
             @endforeach
-
+            <form action="{{ route('cmtRoster') }}" method="GET">
+                @csrf
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
+                    Add More Time Slot
+                </button>
+            </form>
         @else
             <p class="mt-4">No timetable available.</p>
         @endif
     </div>
 
     <script>
-        // ...
+        function showConfirmation(slotId) {
+            if (confirm('Are you sure you want to drop this slot?')) {
+                // Submit the delete form
+                document.getElementById('deleteForm' + slotId).submit();
+            }
+        }
+
+        // Check if there is an error message in the session flash data
+        var errorMessage = '{{ session("error") }}';
+        if (errorMessage) {
+            // Display the error message in a popup or an alert box
+            alert(errorMessage);
+        }
+
     </script>
 </body>
 </html>

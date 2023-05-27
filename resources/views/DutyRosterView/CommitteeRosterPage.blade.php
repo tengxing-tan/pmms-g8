@@ -3,7 +3,7 @@
 <head>
     <title>Committee Duty Roster Page</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <!-- Include Tailwind CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
@@ -57,9 +57,9 @@
                                     <div>{{ $startTime->format('h:i A') }} - {{ $endTime->format('h:i A') }}</div>
                                 </td>
                                 <td class="border py-2 px-4">
-                                    @foreach($slot->users as $user)
+                                    <!-- @foreach($slot->users as $user)
                                         <div>{{ $user->name }}</div>
-                                    @endforeach
+                                    @endforeach -->
                                     <form action="{{ route('addSlot', $slot->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
@@ -76,9 +76,13 @@
             <p class="mt-4">No weekly roster available.</p>
         @endif
     </div>
-
-    <script>
-        // ...
-    </script>
+<script>
+    // Check if there is an error message in the session flash data
+    var errorMessage = '{{ session("error") }}';
+    if (errorMessage) {
+        // Display the error message in a popup or an alert box
+        alert(errorMessage);
+    }
+</script>
 </body>
 </html>
