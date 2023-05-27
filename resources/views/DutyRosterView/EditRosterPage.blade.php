@@ -40,6 +40,7 @@
         .submit-button:hover {
             background-color: #1D4ED8;
         }
+
     </style>
 </head>
 
@@ -47,9 +48,10 @@
     <h1 class="text-3xl font-bold text-center">Edit Weekly Roster</h1>
 
     <div class="flex justify-center items-center min-h-screen">
-        
 
-        <form action="{{ route('updateRoster', $weeklyRoster->id) }}" method="POST" class="w-2/3 bg-white shadow-md rounded p-8">
+
+        <form action="{{ route('updateRoster', $weeklyRoster->id) }}" method="POST"
+            class="w-2/3 bg-white shadow-md rounded p-8">
             @csrf
             @method('PUT')
             <div id="daily-rosters-container">
@@ -64,46 +66,60 @@
                     </thead>
                     <tbody>
                         @foreach($weeklyRoster->dailyRosters as $dailyRoster)
-                            <tr class="daily-roster">
-                                <td>
-                                    <div class="form-group">
-                                        <input type="date" name="date[]" class="input-field w-full" value="{{ $dailyRoster->roster_date }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="time" name="startTime[]" class="input-field w-full" value="{{ $dailyRoster->roster_start_time }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="time" name="endTime[]" class="input-field w-full" value="{{ $dailyRoster->roster_end_time }}">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <button type="button" class="delete-roster-button" onclick="deleteRoster(this)">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr class="daily-roster">
+                            <td>
+                                <div class="form-group">
+                                    <input type="date" name="date[]" class="input-field w-full"
+                                        value="{{ $dailyRoster->roster_date }}">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="time" name="startTime[]" class="input-field w-full"
+                                        value="{{ $dailyRoster->roster_start_time }}">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="time" name="endTime[]" class="input-field w-full"
+                                        value="{{ $dailyRoster->roster_end_time }}">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <button type="button" class="delete-roster-button" onclick="deleteRoster(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
                 @if ($errors->any())
-                    <div class="bg-red-100 text-red-500 rounded p-4 mb-4">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="bg-red-100 text-red-500 rounded p-4 mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
             </div>
             <hr class="my-6">
-            <button type="button" id="add-roster-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Add Daily Roster</button></br></br></br></br>
-            <button type="submit" id="submit-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Update Weekly Roster</button>
+            
+            <button type="button" id="add-roster-button"
+                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Add Daily
+                Roster</button>
+    </br></br></br></br>
+                <div class="flex justify-between items-center mt-4">
+                <a href="{{ route('AdminRoster') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Back</a>
+                <div>
+                    <button type="submit" id="submit-button"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded">Update Weekly
+                    Roster</button>
+                </div>
+            </div>
         </form>
     </div>
 
