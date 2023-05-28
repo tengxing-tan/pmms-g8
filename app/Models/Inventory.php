@@ -20,7 +20,6 @@ class Inventory extends Model
         'id', 
         'opening_quantity',
         'closing_quantity',
-        'current_quantity',
         'comment'
     ];
 
