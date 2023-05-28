@@ -1,3 +1,4 @@
+<x-app-layout>
 <head>
     <title>Edit Weekly Roster</title>
     <!-- Add necessary CSS and JavaScript libraries -->
@@ -29,32 +30,20 @@
             font-size: 0.875rem;
         }
 
-        .submit-button {
-            padding: 0.75rem 2rem;
-            border-radius: 0.375rem;
-            background-color: #2563EB;
-            color: #FFFFFF;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-button:hover {
-            background-color: #1D4ED8;
-        }
 
     </style>
 </head>
 
 <body class="bg-gray-100">
-    <h1 class="text-3xl font-bold text-center">Edit Weekly Roster</h1>
 
     <div class="flex justify-center items-center min-h-screen">
-
 
         <form action="{{ route('updateRoster', $weeklyRoster->id) }}" method="POST"
             class="w-2/3 bg-white shadow-md rounded p-8">
             @csrf
             @method('PUT')
             <div id="daily-rosters-container">
+            <h1 class="text-3xl font-bold text-center mt-1 mb-4">Edit Weekly Roster</h1>
                 <table class="w-full">
                     <thead>
                         <tr>
@@ -112,13 +101,10 @@
                 class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Add Daily
                 Roster</button>
     </br></br></br></br>
-                <div class="flex justify-between items-center mt-4">
-                <a href="{{ route('AdminRoster') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Back</a>
-                <div>
-                    <button type="submit" id="submit-button"
-                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded">Update Weekly
-                    Roster</button>
-                </div>
+               
+            <div class="flex py-6 space-x-4">
+                <button type="submit" id="submit-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">UPDATE</button>
+                <a class="block cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-500 font-medium p-2 px-4 rounded" href="{{ route('AdminRoster') }}">Cancel</a>
             </div>
         </form>
     </div>
@@ -175,3 +161,4 @@
     });
 </script>
 </body>
+</x-app-layout>

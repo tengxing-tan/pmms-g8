@@ -1,3 +1,4 @@
+<x-app-layout>
 <head>
     <title>NewWeeklyRoster</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -43,14 +44,14 @@
 </head>
 <body class="bg-gray-100">
     </br>
-<h1 class="text-3xl font-bold text-center">Create Weekly Roster</h1>
+
 
 <div class="flex justify-center items-center min-h-screen">
    
     <form method="POST" action="/adminRoster" class="w-2/3 bg-white shadow-md rounded p-8">
         @csrf
         <div id="daily-rosters-container">
-             
+            <h1 class="text-3xl font-bold text-center mt-1 mb-4">Create Weekly Roster</h1> 
             <table class="w-full">
                 <thead>
                     <tr>
@@ -98,8 +99,12 @@
             @endif
         </div>
         <hr class="my-6">
-        <button type="button" id="add-roster-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Add Daily Roster</button></br></br></br></br>
-        <button type="submit" id="submit-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Create Weekly Roster</button>
+        
+        <button type="button" id="add-roster-button" class="bg-amber-500 hover:bg-amber-700 text-white font-semibold py-1 px-4 rounded">Add Daily Roster</button></br></br></br></br>
+        <div class="flex py-6 space-x-4">
+            <button type="submit" id="submit-button" class="bg-amber-500 hover:bg-amber-700 text-white font-bold p-2 px-4 rounded">POST</button>
+            <a class="block cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-500 font-medium p-2 px-4 rounded" href="{{ route('AdminRoster') }}">Back</a>
+        </div>
     </form>
 </div>
 
@@ -156,3 +161,4 @@
 </script>
 
 </body>
+</x-app-layout>

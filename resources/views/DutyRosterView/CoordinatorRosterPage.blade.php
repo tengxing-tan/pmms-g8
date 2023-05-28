@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-bold text-center">ALL DUTY ROSTERS</h1>
+        <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">All Duty Roster</h1>
         <p class="text-green-500">{{ session('success') }}</p>
 
         @if($weeklyRosters->count() > 0)
@@ -21,7 +22,7 @@
                     $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
                 @endphp
 
-                <h1 class="text-2xl font-bold mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+                <h1 class="col-span-6 text-2xl font-semibold text-gray-800 mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
                 <table class="mt-4 w-full">
                     <thead>
                         <tr>
@@ -77,3 +78,4 @@
     </div>
 </body>
 </html>
+</x-app-layout>

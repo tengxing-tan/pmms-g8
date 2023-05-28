@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-bold text-center">LATEST DUTY ROSTER</h1>
+        <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">Latest Duty Roster</h1>
         <p class="text-green-500">{{ session('success') }}</p>
 
         @if(isset($weeklyRoster))
@@ -17,14 +18,14 @@
             $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
         @endphp
 
-    <h1 class="text-2xl font-bold mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+    <h1 class="col-span-6 text-2xl font-semibold text-gray-800 mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
             <table class="mt-4 w-full">
                 <thead>
                     <tr>
-                        <th class="bg-gray-200 text-left py-2 px-4">Date</th>
-                        <th class="bg-gray-200 text-left py-2 px-4">Day of Week</th>
-                        <th class="bg-gray-200 text-left py-2 px-4">Slot Time</th>
-                        <th class="bg-gray-200 text-left py-2 px-4">Action</th>
+                        <th class="bg-gray-200 text-center py-2 px-4">Date</th>
+                        <th class="bg-gray-200 text-center py-2 px-4">Day of Week</th>
+                        <th class="bg-gray-200 text-center py-2 px-4">Slot Time</th>
+                        <th class="bg-gray-200 text-center py-2 px-4">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,21 +43,21 @@
                             @endphp
                             <tr>
                                 @if($previousDate != $startDate)
-                                    <td class="border py-2 px-4" rowspan="{{ count($dailyRoster->slot) }}">{{ $startDate->format('j F Y') }}</td></td>
+                                    <td class="border text-center py-2 px-4" rowspan="{{ count($dailyRoster->slot) }}">{{ $startDate->format('j F Y') }}</td></td>
                                     @php
                                         $previousDate = $startDate;
                                     @endphp
                                 @endif
                                 @if($previousDay != $dailyRoster->day_of_week)
-                                    <td class="border py-2 px-4" rowspan="{{ count($dailyRoster->slot) }}">{{ $dailyRoster->day_of_week }}</td>
+                                    <td class="border text-center py-2 px-4" rowspan="{{ count($dailyRoster->slot) }}">{{ $dailyRoster->day_of_week }}</td>
                                     @php
                                         $previousDay = $dailyRoster->day_of_week;
                                     @endphp
                                 @endif
-                                <td class="border py-2 px-4">
+                                <td class="border text-center py-2 px-4">
                                     <div>{{ $startTime->format('h:i A') }} - {{ $endTime->format('h:i A') }}</div>
                                 </td>
-                                <td class="border py-2 px-4">
+                                <td class="border text-center py-2 px-4">
                                     <!-- @foreach($slot->users as $user)
                                         <div>{{ $user->name }}</div>
                                     @endforeach -->
@@ -86,3 +87,4 @@
 </script>
 </body>
 </html>
+</x-app-layout>

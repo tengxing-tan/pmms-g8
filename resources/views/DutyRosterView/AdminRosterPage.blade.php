@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-bold text-center">ALL DUTY ROSTERS</h1>
+    <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">All Duty Roster</h1>
         <p class="text-green-500">{{ session('success') }}</p>
         </br>
         <form action="{{ route('NewRoster') }}" method="GET">
@@ -25,7 +26,7 @@
                     $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
                 @endphp
 
-                <h1 class="text-2xl font-bold mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+                <h1 class="col-span-6 text-2xl font-semibold text-gray-800 mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
                 <table class="mt-4 w-full">
                     <thead>
                         <tr>
@@ -74,8 +75,8 @@
                     </tbody>
                 </table>
                 </br>
-                <div class="flex justify-end mt-4">
-                    <a href="{{ route('editRoster', $weeklyRoster->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Edit</a>
+                <div class="flex justify-end mt-2">
+                    <a href="{{ route('editRoster', $weeklyRoster->id) }}" class="bg-amber-500 hover:bg-amber-700 text-white font-bold p-1 px-4 rounded">Edit</a>
                     <div class="ml-4"></div>
                     <!-- Delete Button -->
                     <form action="{{ route('deleteRoster', $weeklyRoster->id) }}" method="POST" class="ml-2">
@@ -91,3 +92,4 @@
     </div>
 </body>
 </html>
+</x-app-layout>
