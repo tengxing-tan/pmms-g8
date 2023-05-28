@@ -49,7 +49,7 @@ class DutyRosterController extends Controller
         ]);
 
         $weeklyRoster = new WeeklyRoster();
-       
+        $weeklyRoster->user_id = auth()->user()->id;
         $weeklyRoster->save();
 
     // // Save the roster to the database

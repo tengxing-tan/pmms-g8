@@ -16,6 +16,7 @@
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
         <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">My Schedule</h1>
+        <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
         <p class="text-green-500">{{ session('success') }}</p>
 
         @if($userSchedule->isNotEmpty())
@@ -84,7 +85,7 @@
             <p class="mt-4">No timetable available.</p>
         @endif
     </div>
-
+    </div>
     <script>
         function showConfirmation(slotId) {
             if (confirm('Are you sure you want to drop this slot?')) {

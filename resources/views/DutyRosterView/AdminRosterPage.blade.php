@@ -10,7 +10,8 @@
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
     <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">All Duty Roster</h1>
-        <p class="text-green-500">{{ session('success') }}</p>
+        <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
+            <p class="text-green-500">{{ session('success') }}</p>
         </br>
         <form action="{{ route('NewRoster') }}" method="GET">
             @csrf
@@ -18,7 +19,7 @@
                 + NEW
             </button>
         </form>
-
+        
         @if($weeklyRosters->count() > 0)
             @foreach($weeklyRosters as $weeklyRoster)
                 @php
@@ -75,7 +76,7 @@
                     </tbody>
                 </table>
                 </br>
-                <div class="flex justify-end mt-2">
+                <div class="flex justify-end">
                     <a href="{{ route('editRoster', $weeklyRoster->id) }}" class="bg-amber-500 hover:bg-amber-700 text-white font-bold p-1 px-4 rounded">Edit</a>
                     <div class="ml-4"></div>
                     <!-- Delete Button -->
@@ -90,6 +91,7 @@
             <p class="mt-4">No weekly rosters available.</p>
         @endif
     </div>
+</div>
 </body>
 </html>
 </x-app-layout>

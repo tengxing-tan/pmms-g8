@@ -10,6 +10,7 @@
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
         <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">All Duty Roster</h1>
+        <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
         <p class="text-green-500">{{ session('success') }}</p>
 
         @if($weeklyRosters->count() > 0)
@@ -76,6 +77,7 @@
             <p class="mt-4">No weekly rosters available.</p>
         @endif
     </div>
+</div>
 </body>
 </html>
 </x-app-layout>

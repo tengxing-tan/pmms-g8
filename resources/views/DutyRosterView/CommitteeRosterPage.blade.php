@@ -10,6 +10,7 @@
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
         <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">Latest Duty Roster</h1>
+        <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
         <p class="text-green-500">{{ session('success') }}</p>
 
         @if(isset($weeklyRoster))
@@ -77,6 +78,7 @@
             <p class="mt-4">No weekly roster available.</p>
         @endif
     </div>
+</div>
 <script>
     // Check if there is an error message in the session flash data
     var errorMessage = '{{ session("error") }}';
