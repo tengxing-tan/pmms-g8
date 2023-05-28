@@ -6,16 +6,16 @@
         <span class="text-md font-bold">{{$item->item_name}}</span>
         <span class="text-sm text-grey">RM {{$item->item_price}}</span>
     </div>
-    <div class="flex justify-center items center px-2 justify-between mt-2" x-data="counter({{$item->current_quantity}})">
-        <div class="rounded-full drop-shadow-sm px-4 py-2 border-2 border-gray-500 hover:border-1 hover:border-orange-200 active:border-orange-400">
+    <div class="flex justify-center items-center px-2 justify-between mt-2" x-data="counter({{$item->quantity}})">
+        <div class="rounded-full drop-shadow-sm px-3 py-2 border-2 border-gray-500 hover:border-1 hover:border-orange-200 active:border-orange-400">
                 <button type="button" x-on:click="decrement()">-</button>
         </div>
-        <input type="text" disabled name="quantity" x-bind:value="count" class="w-1/4 border-none text-center focus:ring-orange-400"/>
-        <div class="rounded-full drop-shadow-sm px-4 py-2 border-2 border-gray-500 hover:border-1 hover:border-orange-200 active:border-orange-400">
+        <input type="text" readonly name="{{$item->id}}" x-bind:value="count" class="w-1/4 border-none text-center focus:ring-orange-400"/>
+        <div class="rounded-full drop-shadow-sm py-2 px-3 border-2 border-gray-500 hover:border-1 hover:border-orange-200 active:border-orange-400">
             <button type="button" x-on:click="increment()">+</button>
         </div>
     </div>
-    <span class="text-xs text-gray-500 ml-2">stock: {{$item->current_quantity}}</span>
+    <span class="text-xs text-gray-500 ml-2">stock: {{$item->quantity}}</span>
 </div>
 
 <script>

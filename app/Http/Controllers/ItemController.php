@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -14,7 +16,9 @@ class ItemController extends Controller
     {
         $items = Item::latest()->paginate(5);
         return view('item.index', compact('items'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', 0)
+            ->with('title', 'Item List');
+        // ->with('i', (request()->input('page', 1) - 1) * 5);
         // return view('item.index')->with('inventories', $inventories);
     }
 
@@ -31,6 +35,8 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $path = Storage::putFile('public/item_photos', $request->file('item_photo_path'));
+        $path = 'storage/' . substr($path, 7);
         $request->validate([
             'item_name' => 'required|max:255',
             'brand' => 'required|max:255',
@@ -38,11 +44,15 @@ class ItemController extends Controller
             'unit_cost' => 'required|min:0',
             'item_price' => 'required|min:0',
         ]);
-        // $newItem = Item::create($request->all());
-        // dd($newItem);
 
-        return redirect()->route('item.index', Item::create($request->all()))
-            ->with('success', 'Inventory created successfully.');
+        return redirect()->route('item.index', Item::create([
+            'item_name' => $request->input('item_name'),
+            'brand' => $request->input('brand'),
+            'quantity' => $request->input('quantity'),
+            'unit_cost' => $request->input('unit_cost'),
+            'item_price' => $request->input('item_price'),
+            'item_photo_path' => $path,
+        ]))->with('success', 'Inventory created successfully.');
     }
 
     /**
@@ -50,7 +60,10 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
+        // $path = Storage::path($item->item_photo_path);
+        // dd($path);
         return view('item.show', compact('item'));
+        // ->with('path', $path);
     }
 
     /**
@@ -66,6 +79,8 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
+        $path = Storage::putFile('public/item_photos', $request->file('item_photo_path'));
+        $path = 'storage/' . substr($path, 7);
         $request->validate([
             'item_name' => 'required|max:255',
             'brand' => 'required|max:255',
@@ -74,10 +89,14 @@ class ItemController extends Controller
             'item_price' => 'required|min:0',
         ]);
 
-        $item->update($request->all());
-
-        return redirect()->route('item.index')
-            ->with('success', 'Inventory updated successfully');
+        return redirect()->route('item.index', Item::create([
+            'item_name' => $request->input('item_name'),
+            'brand' => $request->input('brand'),
+            'quantity' => $request->input('quantity'),
+            'unit_cost' => $request->input('unit_cost'),
+            'item_price' => $request->input('item_price'),
+            'item_photo_path' => $path,
+        ]))->with('success', 'Inventory created successfully.');
     }
 
     /**
@@ -85,10 +104,30 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        // dd($item);
         $item->delete();
+        $path = 'public/' . substr($item->item_photo_path, 8);
+        $delFile = Storage::delete($path);
+        // dd([$delFile, $path]);
+
+        // Storage::delete($item->item_photo_path);
 
         return redirect()->route('item.index')
             ->with('success', 'Inventory deleted successfully');
+    }
+
+    /**
+     * Filter the specified resource from storage.
+     */
+    public function filter(Request $request)
+    {
+        $items = Item::where('item_name', 'like', $request->input('search') . '%')
+            ->orWhere('brand', 'like', $request->input('search') . '%')
+            ->orderBy('item_name')
+            ->take(10)
+            ->get();
+
+        return view('item.index', compact('items'))
+            ->with('i', 0)
+            ->with('title', 'Filter Item');
     }
 }
