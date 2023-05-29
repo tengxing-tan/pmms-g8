@@ -14,7 +14,7 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto py-6 max-w-6xl">
+    <div class="container mx-auto py-6 max-w-6xl" x-data="{ openDelConfirm: null }">
         <h1 class="col-span-6 text-3xl font-semibold text-gray-800 pb-6">My Schedule</h1>
         <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
         <p class="text-green-500">{{ session('success') }}</p>
@@ -58,14 +58,27 @@
                                                 <!-- @foreach($slot->users as $user)
                                                     <div>{{ $user->name }}</div>
                                                 @endforeach -->
-                                                <form id="deleteForm{{ $slot->id }}" action="{{ route('deleteTimeSlot', $slot->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded"
-                                                        onclick="showConfirmation('{{ $slot->id }}')">
-                                                        DROP
-                                                    </button>
-                                                </form>
+                                                
+                                                <div>
+                                                {{-- <a href="{{url('slots/'.$slot->id)}}" class="btn btn-danger">Drop</a> --}}
+                                                <div>
+                                                <button class="col-span-6 justify-self-end block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor ml-2" type="button" x-on:click="openDelConfirm = {{ $slot->id }}">DROP</button>
+                    
+                                                <template x-if="openDelConfirm === {{ $slot->id }}">
+                                                    <form action="{{ route('deleteTimeSlot', $slot->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
+                                                            <div class="bg-white rounded shadow-2xl shadow-gray-500/50 p-12 px-24 flex flex-col items-center">
+                                                                <p class="text-xl font-bold text-gray-800 mb-6">Confirm to drop the time slot?</p>
+                                                                <div class="flex">
+                                                                    <input type="submit" value="Drop" class="block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor" />
+                                                                    <button class="ml-4 py-2 px-4 rounded bg-gray-500 hover:bg-gray-700 font-medium text-white cursor" type="button" x-on:click="openDelConfirm = false">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </template>
                                             </td>
                                         </tr>
                                     @endif
@@ -77,7 +90,7 @@
             @endforeach
             <form action="{{ route('cmtRoster') }}" method="GET">
                 @csrf
-                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded">
                     Add More Time Slot
                 </button>
             </form>

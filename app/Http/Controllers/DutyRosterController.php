@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use App\Models\WeeklyRoster;
 use App\Models\DailyRoster;
 use App\Models\Slot;
-use App\Models\SlotUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -151,7 +150,6 @@ class DutyRosterController extends Controller
                 else{
                     return redirect()->route('cmtRoster')->with('error', 'The time slot is full');
                 }
-                return redirect()->route('cmtRoster')->with('error', 'Unable to add slot to the timetable');
             }
         } else {
             return redirect()->route('cmtRoster')->with('error', 'User not authenticated');
@@ -243,26 +241,27 @@ class DutyRosterController extends Controller
             return redirect()->route('AdminRoster')->with('success', 'Weekly roster updated successfully.');
         }
 
-
-
-
-    public function deleteRoster($id)
-    {
-        $roster = WeeklyRoster::findOrFail($id);
-
-        // Delete the related slots
-        $roster->dailyRosters()->each(function ($dailyRoster) {
-            $dailyRoster->slot()->delete();
-        });
-
-        // Delete the related daily rosters
-        $roster->dailyRosters()->delete();
-
-        // Delete the selected weekly roster
-        $roster->delete();
-
-        return redirect()->route('AdminRoster')->with('success', 'Weekly roster deleted successfully.');
-    }
+        public function deleteRoster($id)
+        {
+            $roster = WeeklyRoster::findOrFail($id);
+        
+            // Delete the related slots
+            $roster->dailyRosters->each(function ($dailyRoster) {
+                $dailyRoster->slot->each(function ($slot) {
+                    $slot->users()->detach(); // Detach users from slot
+                    $slot->delete(); // Delete slot
+                });
+            });
+        
+            // Delete the related daily rosters
+            $roster->dailyRosters()->delete();
+        
+            // Delete the selected weekly roster
+            $roster->delete();
+        
+            return redirect()->route('AdminRoster')->with('success', 'Weekly roster deleted successfully.');
+        }
+        
 
     public function showSchedule()
     {
@@ -278,16 +277,16 @@ class DutyRosterController extends Controller
 
 
     public function deleteTimeSlot($slotId)
-{
-    // Find the slot by its ID
-    $slot = Slot::findOrFail($slotId);
+    {
+        // Find the slot by its ID
+        $slot = Slot::findOrFail($slotId);
 
-    // Detach the authenticated user from the slot
-    $slot->users()->detach(auth()->user()->id);
+        // Detach the authenticated user from the slot
+        $slot->users()->detach(auth()->user()->id);
 
-    // Redirect back or return a response indicating success
-    return back()->with('success', 'Time slot deleted successfully');
-}
+        // Redirect back or return a response indicating success
+        return back()->with('success', 'Time slot deleted successfully');
+    }
 
 
 }

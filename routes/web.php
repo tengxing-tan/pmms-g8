@@ -76,7 +76,6 @@ Route::middleware([
     Route::get('/editRoster/{id}', 'App\Http\Controllers\DutyRosterController@editRoster')->name('editRoster');
     Route::put('/roster/{id}', 'App\Http\Controllers\DutyRosterController@updateRoster')->name('updateRoster');
     Route::delete('/roster/{id}', 'App\Http\Controllers\DutyRosterController@deleteRoster')->name('deleteRoster');
-
 });
 
 
