@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\DutyRosterController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -127,6 +128,21 @@ Route::middleware([
 
 });
 
+// Roster's Routes
+Route::get('/adminRoster', 'App\Http\Controllers\DutyRosterController@showAdminRoster')->name('AdminRoster');
+Route::post('/adminRoster', 'App\Http\Controllers\DutyRosterController@createRoster')->name('Saved');
+Route::get('/coordinatorRoster', 'App\Http\Controllers\DutyRosterController@showCoordinatorRoster')->name('CoordinatorRoster');
+Route::get('/newRoster', 'App\Http\Controllers\DutyRosterController@newRoster')->name('NewRoster');
+Route::get('/cmtRoster', 'App\Http\Controllers\DutyRosterController@showCommitteeRoster')->name('cmtRoster');
+Route::post('/add-slot/{slotId}', 'App\Http\Controllers\DutyRosterController@addSlot')->name('addSlot');
+Route::get('/editRoster/{id}', 'App\Http\Controllers\DutyRosterController@editRoster')->name('editRoster');
+Route::put('/roster/{id}', 'App\Http\Controllers\DutyRosterController@updateRoster')->name('updateRoster');
+Route::delete('/roster/{id}', 'App\Http\Controllers\DutyRosterController@deleteRoster')->name('deleteRoster');
+Route::get('/schedule', 'App\Http\Controllers\DutyRosterController@showSchedule')->name('schedule');
+Route::delete('/slots/{slotId}', 'App\Http\Controllers\DutyRosterController@deleteTimeSlot')->name('deleteTimeSlot');
+
+
+Route::get('/items', [PaymentController::class, 'items'])->name('items');
 
 
 
