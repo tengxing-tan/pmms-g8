@@ -15,11 +15,11 @@
         </br>
         <form action="{{ route('NewRoster') }}" method="GET">
             @csrf
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            <button type="submit" class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded">
                 + NEW
             </button>
         </form>
-        
+
         @if($weeklyRosters->count() > 0)
             @foreach($weeklyRosters as $weeklyRoster)
                 @php

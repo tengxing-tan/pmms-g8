@@ -61,4 +61,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function slot()
+    {
+        return $this->belongsToMany(Slot::class)->withTimestamps();
+    }
+
 }

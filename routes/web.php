@@ -69,6 +69,14 @@ Route::middleware([
     Route::put('update-user/{id}', [UserController::class, 'update']);
     Route::delete('delete-user/{id}', [UserController::class, 'destroy']);
 
+    // Roster's Routes
+    Route::get('/adminRoster', 'App\Http\Controllers\DutyRosterController@showAdminRoster')->name('AdminRoster');
+    Route::post('/adminRoster', 'App\Http\Controllers\DutyRosterController@createRoster')->name('Saved');
+    Route::get('/newRoster', 'App\Http\Controllers\DutyRosterController@newRoster')->name('NewRoster');
+    Route::get('/editRoster/{id}', 'App\Http\Controllers\DutyRosterController@editRoster')->name('editRoster');
+    Route::put('/roster/{id}', 'App\Http\Controllers\DutyRosterController@updateRoster')->name('updateRoster');
+    Route::delete('/roster/{id}', 'App\Http\Controllers\DutyRosterController@deleteRoster')->name('deleteRoster');
+
 });
 
 
@@ -97,6 +105,8 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/report', [ReportController::class, 'report'])->name('report');
+
+    Route::get('/coordinatorRoster', 'App\Http\Controllers\DutyRosterController@showCoordinatorRoster')->name('CoordinatorRoster');
 
 });
 
@@ -128,21 +138,26 @@ Route::middleware([
 
 });
 
-// Roster's Routes
-Route::get('/adminRoster', 'App\Http\Controllers\DutyRosterController@showAdminRoster')->name('AdminRoster');
-Route::post('/adminRoster', 'App\Http\Controllers\DutyRosterController@createRoster')->name('Saved');
-Route::get('/coordinatorRoster', 'App\Http\Controllers\DutyRosterController@showCoordinatorRoster')->name('CoordinatorRoster');
-Route::get('/newRoster', 'App\Http\Controllers\DutyRosterController@newRoster')->name('NewRoster');
-Route::get('/cmtRoster', 'App\Http\Controllers\DutyRosterController@showCommitteeRoster')->name('cmtRoster');
-Route::post('/add-slot/{slotId}', 'App\Http\Controllers\DutyRosterController@addSlot')->name('addSlot');
-Route::get('/editRoster/{id}', 'App\Http\Controllers\DutyRosterController@editRoster')->name('editRoster');
-Route::put('/roster/{id}', 'App\Http\Controllers\DutyRosterController@updateRoster')->name('updateRoster');
-Route::delete('/roster/{id}', 'App\Http\Controllers\DutyRosterController@deleteRoster')->name('deleteRoster');
-Route::get('/schedule', 'App\Http\Controllers\DutyRosterController@showSchedule')->name('schedule');
-Route::delete('/slots/{slotId}', 'App\Http\Controllers\DutyRosterController@deleteTimeSlot')->name('deleteTimeSlot');
+Route::middleware([
+    'auth:sanctum',
+    'role:committee', // Allow only committee roles
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+
+    Route::get('/cmtRoster', 'App\Http\Controllers\DutyRosterController@showCommitteeRoster')->name('cmtRoster');
+    Route::post('/add-slot/{slotId}', 'App\Http\Controllers\DutyRosterController@addSlot')->name('addSlot');
+    Route::get('/schedule', 'App\Http\Controllers\DutyRosterController@showSchedule')->name('schedule');
+    Route::delete('/slots/{slotId}', 'App\Http\Controllers\DutyRosterController@deleteTimeSlot')->name('deleteTimeSlot');
+
+});
 
 
-Route::get('/items', [PaymentController::class, 'items'])->name('items');
+
+
+
+
+
 
 
 

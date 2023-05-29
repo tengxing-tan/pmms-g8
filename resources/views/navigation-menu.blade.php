@@ -29,9 +29,6 @@
                     <x-nav-link href="{{ route('AdminRoster') }}" :active="request()->routeIs('AdminRoster')">
                         {{ __('Duty Roster') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('CoordinatorRoster') }}" :active="request()->routeIs('CoordinatorRoster')">
-                        {{ __('Duty Roster') }}
-                    </x-nav-link>
                     @endrole
                     @role('cashier')
                     <x-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
@@ -45,6 +42,12 @@
                     <x-nav-link href="{{ route('announcement-list') }}" :active="request()->routeIs('announcement-list')">
                         {{ __('Announcement Board') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('cmtRoster') }}" :active="request()->routeIs('cmtRoster')">
+                        {{ __('Weekly Roster') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('schedule') }}" :active="request()->routeIs('schedule')">
+                        {{ __('My Schedule') }}
+                    </x-nav-link>
                     @endrole
                     @role('coordinator')
                     <x-nav-link href="{{ route('report') }}" :active="request()->routeIs('report')">
@@ -53,11 +56,8 @@
                     <x-nav-link href="{{ route('announcement-list') }}" :active="request()->routeIs('announcement-list')">
                         {{ __('Announcement Board') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('cmtRoster') }}" :active="request()->routeIs('cmtRoster')">
+                    <x-nav-link href="{{ route('CoordinatorRoster') }}" :active="request()->routeIs('CoordinatorRoster')">
                         {{ __('Duty Roster') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('schedule') }}" :active="request()->routeIs('schedule')">
-                        {{ __('My Schedule') }}
                     </x-nav-link>
                     @endrole
                 </div>
