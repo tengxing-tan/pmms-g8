@@ -43,7 +43,7 @@
             @csrf
             @method('PUT')
             <div id="daily-rosters-container">
-            <h1 class="text-3xl font-bold text-center mt-1 mb-4">Edit Weekly Roster</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-gray-800 mb-4">Edit Weekly Roster</h1>
                 <table class="w-full">
                     <thead>
                         <tr>
@@ -97,13 +97,12 @@
             </div>
             <hr class="my-6">
             
-            <button type="button" id="add-roster-button"
-                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">Add Daily
+            <button type="button" id="add-roster-button" class="bg-amber-500 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded">Add Daily
                 Roster</button>
     </br></br></br></br>
                
             <div class="flex py-6 space-x-4">
-                <button type="submit" id="submit-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">UPDATE</button>
+                <button type="submit" id="submit-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded">Update</button>
                 <a class="block cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-500 font-medium p-2 px-4 rounded" href="{{ route('AdminRoster') }}">Cancel</a>
             </div>
         </form>

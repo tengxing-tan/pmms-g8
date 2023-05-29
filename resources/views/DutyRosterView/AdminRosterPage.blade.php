@@ -8,17 +8,29 @@
             <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         </head>
         <body class="bg-gray-100">
-            <div class="container mx-auto p-6 max-w-6xl" x-data="{ openDelConfirm: null }">
-                <h1 class="col-span-6 text-3xl font-semibold text-gray-800 pb-6">All Duty Roster</h1>
-                <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
-                    <p class="text-green-500">{{ session('success') }}</p>
-                    <form action="{{ route('NewRoster') }}" method="GET">
-                        @csrf
-                        <button type="submit" class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded">
-                            + NEW
+            <div class="container mx-auto p-6 max-w-6xl" x-data="{ openPopMesg: true, openDelConfirm: null }">
+            <!-- success message -->
+                @if ($message = Session::get('success'))
+                    <div class="px-4 py-2 mb-4 flex justify-between items-center w-full bg-green-400 text-gray-50 font-bold" x-show="openPopMesg" x-transition>
+                        <p>{{ $message  }}</p>
+                        <button class="flex items-center" x-on:click="openPopMesg = false">
+                            <span class="material-symbols-outlined font-medium">close</span>
                         </button>
-                    </form>
+                    </div>
+                @endif
 
+                <div class="grid grid-cols-12 items-center w-full">
+                    <h1 class="col-span-6 text-3xl font-semibold text-gray-800">All Duty Roster</h1>
+                    <div class="col-span-6 justify-self-end">
+                        <form action="{{ route('NewRoster') }}" method="GET">
+                            @csrf
+                            <button type="submit" class="bg-amber-500 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded">
+                                + New
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg mt-4">
                     @if($weeklyRosters->count() > 0)
                         @foreach($weeklyRosters as $weeklyRoster)
                             @php
@@ -26,7 +38,7 @@
                                 $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
                             @endphp
 
-                            <h1 class="col-span-6 text-2xl font-semibold text-gray-800 mt-4">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+                            <h1 class="col-span-6 text-2xl font-semibold text-gray-800">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
                             <table class="mt-4 w-full">
                                 <thead>
                                     <tr>
@@ -76,12 +88,12 @@
                             </table>
                             </br>
                             <div class="flex justify-end">
-                                <a href="{{ route('editRoster', $weeklyRoster->id) }}" class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded mb-4">Edit</a>
+                                <a href="{{ route('editRoster', $weeklyRoster->id) }}" class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded mb-10">Edit</a>
                                 <div class="ml-4"></div>
-                                <div>
+                        
                                 {{-- <a href="{{url('deleteRoster/'.$weeklyRoster->id)}}" class="btn btn-danger">Delete</a> --}}
-                                <div>
-                                <button class="col-span-6 justify-self-end block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor ml-2" type="button" x-on:click="openDelConfirm = {{ $weeklyRoster->id }}">Delete</button>
+                   
+                                <button class="col-span-6 justify-self-end block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor ml-2 mb-10" type="button" x-on:click="openDelConfirm = {{ $weeklyRoster->id }}">Delete</button>
     
                                 <template x-if="openDelConfirm === {{ $weeklyRoster->id }}">
                                     <form action="{{ url('roster/'.$weeklyRoster->id)}}" method="POST">
@@ -98,6 +110,19 @@
                                         </div>
                                     </form>
                                 </template>
+                                
+                                <!-- Add Slot Error -->
+                                <template x-if="openError === true">
+                                <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
+                                    <div class="bg-white rounded shadow-2xl shadow-gray-500/50 p-12 px-24 flex flex-col items-center">
+                                        <p class="text-xl font-bold text-gray-800 mb-6" x-text="errorMessage"></p>
+                                        <div class="flex">
+                                            <button class="block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor" type="button" x-on:click="openError = false">OK</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            
                             </div>
                         @endforeach
                     @else
@@ -108,3 +133,20 @@
         </body>
     </html>
 </x-app-layout>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var errorMessage = "{{ session('error') }}";
+        if (errorMessage) {
+            // Display the error message in a pop-up box
+            var app = {
+                openError: true,
+                errorMessage: errorMessage
+            };
+        } else {
+            var app = {
+                openError: false,
+                errorMessage: ''
+            };
+        }
+    });
+</script>

@@ -64,7 +64,7 @@
                                     @endforeach -->
                                     <form action="{{ route('addSlot', $slot->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded">
+                                        <button type="submit" class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded">
                                             Add Slot
                                         </button>
                                     </form>

@@ -29,17 +29,7 @@
             font-size: 0.875rem;
         }
 
-        .submit-button {
-            padding: 0.75rem 2rem;
-            border-radius: 0.375rem;
-            background-color: #2563EB;
-            color: #FFFFFF;
-            transition: background-color 0.3s ease;
-        }
 
-        .submit-button:hover {
-            background-color: #1D4ED8;
-        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -100,9 +90,9 @@
         </div>
         <hr class="my-6">
         
-        <button type="button" id="add-roster-button" class="bg-amber-500 hover:bg-amber-700 text-white font-semibold py-1 px-4 rounded">Add Daily Roster</button></br></br></br></br>
+        <button type="button" id="add-roster-button" class="bg-amber-500 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded">Add Daily Roster</button></br></br></br></br>
         <div class="flex py-6 space-x-4">
-            <button type="submit" id="submit-button" class="bg-amber-500 hover:bg-amber-700 text-white font-bold p-2 px-4 rounded">POST</button>
+            <button type="submit" id="submit-button" class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded">Post</button>
             <a class="block cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-500 font-medium p-2 px-4 rounded" href="{{ route('AdminRoster') }}">Back</a>
         </div>
     </form>

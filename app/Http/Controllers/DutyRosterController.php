@@ -142,19 +142,20 @@ class DutyRosterController extends Controller
             if ($userSlotsCount < 2 && !$slot->users()->where('user_id', $user->id)->exists()) {
                 $user->slot()->attach($slot);
                 return redirect()->route('schedule')->with('success', 'Slot added to the timetable successfully');
-            }
-            else {
-                if($slot->users()->where('user_id', $user->id)->exists()){
-                    return redirect()->route('cmtRoster')->with('error', 'You are not allowed to add the same time slot');
+            } else {
+                if ($slot->users()->where('user_id', $user->id)->exists()) {
+                    $errorMessage = 'The slot is already assigned to you';
+                } else {
+                    $errorMessage = 'The time slot is full';
                 }
-                else{
-                    return redirect()->route('cmtRoster')->with('error', 'The time slot is full');
-                }
+
+                return redirect()->route('cmtRoster')->with('error', $errorMessage);
             }
         } else {
             return redirect()->route('cmtRoster')->with('error', 'User not authenticated');
         }
     }
+
 
         public function editRoster($id)
         {

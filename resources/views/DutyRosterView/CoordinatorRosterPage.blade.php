@@ -23,8 +23,8 @@
                     $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
                 @endphp
 
-                <h1 class="col-span-6 text-2xl font-semibold text-gray-800 mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
-                <table class="mt-4 w-full">
+                <h1 class="col-span-6 text-2xl font-semibold text-gray-800">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+                <table class="mt-4 w-full mb-8">
                     <thead>
                         <tr>
                             <th class="bg-gray-200 text-center py-2 px-4">Date</th>

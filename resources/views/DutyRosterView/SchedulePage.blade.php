@@ -14,10 +14,30 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto py-6 max-w-6xl" x-data="{ openDelConfirm: null }">
-        <h1 class="col-span-6 text-3xl font-semibold text-gray-800 pb-6">My Schedule</h1>
-        <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
-        <p class="text-green-500">{{ session('success') }}</p>
+    <div class="container mx-auto py-6 max-w-6xl" x-data="{ openPopMesg: true, openDelConfirm: null }">
+        <!-- success message -->
+        @if ($message = Session::get('success'))
+            <div class="px-4 py-2 mb-4 flex justify-between items-center w-full bg-green-400 text-gray-50 font-bold" x-show="openPopMesg" x-transition>
+                <p>{{ $message  }}</p>
+                <button class="flex items-center" x-on:click="openPopMesg = false">
+                    <span class="material-symbols-outlined font-medium">close</span>
+                </button>
+            </div>
+        @endif
+
+
+        <div class="grid grid-cols-12 items-center w-full">
+            <h1 class="col-span-6 text-3xl font-semibold text-gray-800">My Schedule</h1>
+            <div class="col-span-6 justify-self-end">
+                <form action="{{ route('cmtRoster') }}" method="GET" class="flex justify-end">
+                @csrf
+                <button type="submit" class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor">
+                    Add More Time Slot
+                </button>
+            </form>
+            </div>
+        </div>
+        <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg mt-4">
 
         @if($userSchedule->isNotEmpty())
             @foreach($userSchedule as $weeklyRoster)
@@ -62,7 +82,7 @@
                                                 <div>
                                                 {{-- <a href="{{url('slots/'.$slot->id)}}" class="btn btn-danger">Drop</a> --}}
                                                 <div>
-                                                <button class="col-span-6 justify-self-end block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor ml-2" type="button" x-on:click="openDelConfirm = {{ $slot->id }}">DROP</button>
+                                                <button class="col-span-6 justify-self-end block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor ml-2" type="button" x-on:click="openDelConfirm = {{ $slot->id }}">Drop</button>
                     
                                                 <template x-if="openDelConfirm === {{ $slot->id }}">
                                                     <form action="{{ route('deleteTimeSlot', $slot->id) }}" method="POST">
@@ -88,12 +108,6 @@
                     </table>
                 </div>
             @endforeach
-            <form action="{{ route('cmtRoster') }}" method="GET">
-                @csrf
-                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded">
-                    Add More Time Slot
-                </button>
-            </form>
         @else
             <p class="mt-4">No timetable available.</p>
         @endif
