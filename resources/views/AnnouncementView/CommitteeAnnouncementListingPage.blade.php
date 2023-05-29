@@ -6,7 +6,7 @@
             <h1 class="col-span-6 text-3xl font-semibold text-gray-800">Announcement Board</h1>
         </div>
 
-        <div class="p-6 w-full max-w-4xl mx-auto bg-white text-gray-700 rounded-lg">
+        <div class="p-6 w-full max-w-4xl mx-auto bg-white text-gray-700 rounded-lg mt-4">
             <table class="table">
                 <thead>
                     <tr class="bg-gray-100 px-4 rounded-md mt-8 font-semibold text-gray-800">

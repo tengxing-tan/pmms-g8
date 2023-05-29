@@ -14,8 +14,8 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto py-8">
-        <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">My Schedule</h1>
+    <div class="container mx-auto py-6 max-w-6xl">
+        <h1 class="col-span-6 text-3xl font-semibold text-gray-800 pb-6">My Schedule</h1>
         <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
         <p class="text-green-500">{{ session('success') }}</p>
 
@@ -26,7 +26,7 @@
                     $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
                 @endphp
 
-                <h1 class="col-span-6 text-2xl font-semibold text-gray-800 mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+                <h1 class="col-span-6 text-2xl font-semibold text-gray-800">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
 
                 <div class="table-container">
                     <table class="mt-4 w-full">

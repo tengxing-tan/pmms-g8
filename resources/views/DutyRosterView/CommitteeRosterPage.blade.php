@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto py-8">
-        <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">Latest Duty Roster</h1>
+    <div class="container mx-auto p-6 max-w-6xl">
+        <h1 class="col-span-6 text-3xl font-semibold text-gray-800 pb-6">Latest Duty Roster</h1>
         <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
         <p class="text-green-500">{{ session('success') }}</p>
 
@@ -19,14 +19,14 @@
             $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
         @endphp
 
-    <h1 class="col-span-6 text-2xl font-semibold text-gray-800 mt-8">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+    <h1 class="col-span-6 text-2xl font-semibold text-gray-800">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
             <table class="mt-4 w-full">
                 <thead>
                     <tr>
-                        <th class="bg-gray-200 text-center py-2 px-4">Date</th>
-                        <th class="bg-gray-200 text-center py-2 px-4">Day of Week</th>
-                        <th class="bg-gray-200 text-center py-2 px-4">Slot Time</th>
-                        <th class="bg-gray-200 text-center py-2 px-4">Action</th>
+                        <th class="bg-gray-100 text-center py-2 px-4">Date</th>
+                        <th class="bg-gray-100 text-center py-2 px-4">Day of Week</th>
+                        <th class="bg-gray-100 text-center py-2 px-4">Slot Time</th>
+                        <th class="bg-gray-100 text-center py-2 px-4">Action</th>
                     </tr>
                 </thead>
                 <tbody>

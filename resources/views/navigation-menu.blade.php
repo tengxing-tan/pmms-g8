@@ -43,7 +43,7 @@
                         {{ __('Announcement Board') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('cmtRoster') }}" :active="request()->routeIs('cmtRoster')">
-                        {{ __('Weekly Roster') }}
+                        {{ __('Add Slot') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('schedule') }}" :active="request()->routeIs('schedule')">
                         {{ __('My Schedule') }}
