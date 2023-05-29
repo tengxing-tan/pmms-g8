@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="p-6 w-full max-w-4xl mx-auto" x-data="{ openPopMesg: true }">
+    <div class="     w-full max-w-4xl mx-auto" x-data="{ openPopMesg: true }">
         <!-- success message -->
         @if ($message = Session::get('success'))
         <div class="px-4 py-2 mb-4 flex justify-between items-center w-full bg-green-400 text-gray-50 font-bold" x-show="openPopMesg" x-transition>

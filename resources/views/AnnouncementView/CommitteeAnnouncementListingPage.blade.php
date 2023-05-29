@@ -9,8 +9,8 @@
         <div class="p-6 w-full max-w-4xl mx-auto bg-white text-gray-700 rounded-lg">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>#</th>
+                    <tr class="bg-gray-100 px-4 rounded-md mt-8 font-semibold text-gray-800">
+                        <th>No</th>
                         <th>Title</th>
                         <th>Action</th>
                     </tr>

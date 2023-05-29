@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto py-8">
-    <h1 class="col-span-6 text-3xl font-semibold text-gray-800 text-center">All Duty Roster</h1>
+    <div class="container mx-auto p-6 max-w-4xl">
+    <h1 class="col-span-6 text-3xl font-semibold text-gray-800 pb-6">All Duty Roster</h1>
         <div class="p-6 w-full max-w-6xl mx-auto bg-white text-gray-700 rounded-lg">
             <p class="text-green-500">{{ session('success') }}</p>
         </br>

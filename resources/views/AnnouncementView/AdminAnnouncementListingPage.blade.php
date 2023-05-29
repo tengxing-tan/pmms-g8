@@ -12,7 +12,7 @@
         </div>
         @endif
 
-        <div class="grid grid-cols-12 items-center w-full">
+        <div class="grid grid-cols-12 items-center w-full pb-6">
             <h1 class="col-span-6 text-3xl font-semibold text-gray-800">Announcement List</h1>
             <div class="col-span-6 justify-self-end">
                 <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor" href="{{url('create-announcement')}}"> Create New Announcement</a>
@@ -22,8 +22,8 @@
         <div class="p-6 w-full max-w-4xl mx-auto bg-white text-gray-700 rounded-lg">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>#</th>
+                    <tr class="bg-gray-100 px-4 rounded-md mt-8 font-semibold text-gray-800">
+                        <th>No</th>
                         <th>Title</th>
                         <th>Description</th>
                         <th>Action</th>
@@ -40,7 +40,7 @@
                         <td>{{$ann->description}}</td>
                         <td>
                             <div class="flex">
-                                <a href="{{url('edit-announcement/'.$ann->id)}}" class="btn btn-primary">Edit</a> |
+                                <a href="{{url('edit-announcement/'.$ann->id)}}" class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded mr-2">Edit</a>
                             {{-- <a href="{{url('delete-announcement/'.$ann->id)}}" class="btn btn-danger">Delete</a> --}}
 
                                 <div>
