@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="p-6">
         <form class="mx-auto p-4 w-full max-w-4xl bg-white rounded-lg" action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data" wire:submit.prevent="save">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800 mb-4">New Inventory</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">New Inventory</h1>
             @csrf
 
             <!-- input field -->

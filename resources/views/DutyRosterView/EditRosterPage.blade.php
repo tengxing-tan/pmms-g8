@@ -43,7 +43,7 @@
             @csrf
             @method('PUT')
             <div id="daily-rosters-container">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800 mb-4">Edit Weekly Roster</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">Edit Weekly Roster</h1>
                 <table class="w-full">
                     <thead>
                         <tr>

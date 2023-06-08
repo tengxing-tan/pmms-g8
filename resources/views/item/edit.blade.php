@@ -3,7 +3,7 @@
         <form class="mx-auto p-4 w-full max-w-4xl bg-white rounded-lg" action="{{ route('item.update', $item->id) }}" method="POST" enctype="multipart/form-data" wire:submit.prevent="save">
             @csrf
             @method('PUT')
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800 mb-4">Edit Inventory</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">Edit Inventory</h1>
             <!-- input field -->
             <div class="grid grid-cols-6 gap-x-12 gap-y-6">
                 <label for="item_name" class="col-span-3 flex flex-col">

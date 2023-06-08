@@ -4,7 +4,7 @@
 
     <div class="p-6">
         <form class="mx-auto p-4 w-full max-w-4xl bg-white rounded-lg" method="post" action="{{url('update-announcement')}}">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800 mb-4">Edit Announcement</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">Edit Announcement</h1>
             @csrf
             <input type="hidden" name="id" value="{{$announcements->id}}">
             <div class="md-3">

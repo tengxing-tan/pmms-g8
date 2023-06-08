@@ -6,7 +6,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                     <div class="mx-auto p-4 w-full max-w-4xl bg-white rounded-lg">
-                        <h2 class="col-span-6 text-3xl font-semibold text-gray-800 mb-4">Announcement Detail</h2>
+                        <h2 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">Announcement Detail</h2>
 
                         <label for="ann_title" class="col-span-3 flex flex-col">
                             <span class="font-medium text-gray-700 mb-1">Title: </span>

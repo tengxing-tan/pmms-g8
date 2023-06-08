@@ -3,7 +3,7 @@
 
     <div class="p-6 w-full max-w-4xl mx-auto">
         <div class="grid grid-cols-12 items-center w-full">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800">Announcement Board</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800">Announcement Board</h1>
         </div>
 
         <div class="p-6 w-full max-w-4xl mx-auto bg-white text-gray-700 rounded-lg mt-4">

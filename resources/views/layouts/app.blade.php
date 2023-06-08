@@ -29,7 +29,7 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-indigo-50">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->

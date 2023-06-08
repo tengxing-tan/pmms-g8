@@ -4,7 +4,7 @@
 
     <div class="p-6">
         <form class="mx-auto p-4 w-full max-w-4xl bg-white rounded-lg" method="post" action="{{url('update-user', $users->id)}}">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800 mb-4">Edit User</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">Edit User</h1>
             @method('PUT')
             @csrf
             <input type="hidden" name="id" value="{{$users->id}}">

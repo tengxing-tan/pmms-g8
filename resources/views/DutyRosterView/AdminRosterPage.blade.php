@@ -20,7 +20,7 @@
                 @endif
 
                 <div class="grid grid-cols-12 items-center w-full">
-                    <h1 class="col-span-6 text-3xl font-semibold text-gray-800">All Duty Roster</h1>
+                    <h1 class="col-span-6 text-3xl font-semibold text-blue-800">All Duty Roster</h1>
                     <div class="col-span-6 justify-self-end">
                         <form action="{{ route('NewRoster') }}" method="GET">
                             @csrf
@@ -38,7 +38,7 @@
                                 $lastDate = \Carbon\Carbon::parse($weeklyRoster->dailyRosters->max('roster_date'))->format('j F Y');
                             @endphp
 
-                            <h1 class="col-span-6 text-2xl font-semibold text-gray-800">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
+                            <h1 class="col-span-6 text-2xl font-semibold text-blue-800">Weekly Duty Roster ({{ $firstDate }} - {{ $lastDate }})</h1>
                             <table class="mt-4 w-full">
                                 <thead>
                                     <tr>

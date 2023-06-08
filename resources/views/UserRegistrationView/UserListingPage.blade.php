@@ -16,7 +16,7 @@
 
 
         <div class="grid grid-cols-12 items-center w-full">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800 mb-6">User List</h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-6">User List</h1>
             <div class="col-span-6 justify-self-end">
                 <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor" href="{{url('create-user')}}"> Create New User</a>
             </div>
