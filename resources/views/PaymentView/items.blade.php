@@ -1,4 +1,7 @@
 <x-app-layout>
+    @error('error')
+        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+    @enderror
     <div class="mx-12 my-4">
         <form action="/items">          
             <div class="relative m-2 items-center drop-shadow-sm">
@@ -30,4 +33,12 @@
             </div>
         </form>
     </div>
+    <script>
+        // Check if there is an error message in the session flash data
+        var errorMessage = '{{ session("error") }}';
+        if (errorMessage) {
+            // Display the error message in a popup or an alert box
+            alert(errorMessage);
+        }
+    </script>
 </x-app-layout>

@@ -28,6 +28,10 @@ class PaymentController extends Controller
             }
         }
 
+        if(count($items) == 0) {
+            return back()->with('error', 'Please select at least one item');
+        }
+
         return view('PaymentView.payment', [
             "items" => $items, 
             "total_price" => $total_price
