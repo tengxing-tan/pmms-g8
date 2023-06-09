@@ -74,7 +74,7 @@ class PaymentController extends Controller
         return view('PaymentView.receipt', [
             'total_price' => $request['total_price'],
             'paid_amount' => $formFields['paid_amount'],
-            'change' => $change, 
+            'change' => round($change, 2), 
             'items' => $items, 
             'payment' => $payment,
         ]);
