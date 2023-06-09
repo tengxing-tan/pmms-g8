@@ -12,7 +12,10 @@
                 <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
                     <div class="bg-white rounded shadow-2xl shadow-gray-500/50 p-12 px-24 flex flex-col items-center">
                         <p class="text-xl font-bold text-gray-800 mb-6">Confirm to delete?</p>
-                        <input type="submit" value="Delete" class="block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor" />
+                        <div class="flex">
+                            <input type="submit" value="Delete" class="block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor" />
+                            <button class="block ml-4 cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-500 font-medium p-2 px-4 rounded" type="button" x-on:click="openDelConfirm = false">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -38,13 +41,21 @@
                     <span class="font-medium text-gray-700 mb-1">Item price</span>
                     <input name="item_price" id="item_price" value="{{ $item->item_price }}" class="border-none bg-gray-100 rounded focus:ring-2 focus:ring-amber-500" type="number" step="0.01" min="0" value="0" disabled />
                 </label>
-                <label for="img_photo_path" class="col-span-3 flex flex-col">
+                <!-- image upload -->
+                <div class="col-span-3 flex flex-col items-start justify-center w-full">
                     <span class="font-medium text-gray-700 mb-1">Item picture</span>
-                    <div class="w-full h-56 flex justify-center items-center bg-gray-100 rounded-lg">
-                        <span class="text-gray-300 font-medium text-xl">Upload item picture</span>
-                    </div>
-                    <input class="hidden" type="file" id="img_photo_path" name="img_photo_path" accept="image/*">
-                </label>
+                    <!-- <label for="item_photo_path" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span></p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                        </div>
+                        <input class="hidden" type="file" wire:model="photo" id="item_photo_path" name="item_photo_path">
+                    </label> -->
+                    <img src="{{ asset($item->item_photo_path) }}" alt="photo">
+                </div>
             </div>
 
             <!-- Action button -->

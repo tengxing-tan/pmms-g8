@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow-sm shadow-sky-800">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -12,21 +12,54 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+
+                    {{-- <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
+                    @role('admin')
                     <x-nav-link href="{{ route('item.index') }}" :active="request()->routeIs('item.*')">
                         {{ __('Inventory') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
-                        {{ __('Payment') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('admin-announcement-list') }}" :active="request()->routeIs('admin-announcement-list')">
                         {{ __('Announcement') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('user-listing') }}" :active="request()->routeIs('user-listing')">
+                        {{ __('User') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('AdminRoster') }}" :active="request()->routeIs('AdminRoster')">
+                        {{ __('Duty Roster') }}
+                    </x-nav-link>
+                    @endrole
+                    @role('cashier')
+                    <x-nav-link href="{{ route('items') }}" :active="request()->routeIs('items')">
+                        {{ __('Payment') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('item.index') }}" :active="request()->routeIs('item.*')">
+                        {{ __('Inventory') }}
+                    </x-nav-link>
+                    @endrole
+                    @role('committee')
+                    <x-nav-link href="{{ route('announcement-list') }}" :active="request()->routeIs('announcement-list')">
+                        {{ __('Announcement Board') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('cmtRoster') }}" :active="request()->routeIs('cmtRoster')">
+                        {{ __('Add Slot') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('schedule') }}" :active="request()->routeIs('schedule')">
+                        {{ __('My Schedule') }}
+                    </x-nav-link>
+                    @endrole
+                    @role('coordinator')
                     <x-nav-link href="{{ route('report') }}" :active="request()->routeIs('report')">
                         {{ __('Report') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('announcement-list') }}" :active="request()->routeIs('announcement-list')">
+                        {{ __('Announcement Board') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('CoordinatorRoster') }}" :active="request()->routeIs('CoordinatorRoster')">
+                        {{ __('Duty Roster') }}
+                    </x-nav-link>
+                    @endrole
                 </div>
             </div>
 

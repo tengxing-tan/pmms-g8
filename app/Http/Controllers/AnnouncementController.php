@@ -7,22 +7,21 @@ use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller
 {
-    public function index()
+    public function index() //display all announcements
     {
 
         $announcements = Announcement::get();
-        //return $announcements;
-        //return view('AnnouncementView.AdminAnnouncementListingPage',compact('announcements'));
+
         return view('AnnouncementView.AdminAnnouncementListingPage', ["announcements" => $announcements]);
     }
 
-    public function create()
+    public function create()    //create new announcement
     {
 
         return view('AnnouncementView.CreateAnnouncementForm');
     }
 
-    public function store(Request $request)
+    public function store(Request $request) //save new announcement
     {
         $request->validate([
             'title' => 'required',
@@ -38,18 +37,17 @@ class AnnouncementController extends Controller
         $ann->description = $description;
         $ann->save();
 
-        return redirect()->back()->with('success','Announcement Added Successfully');
-        //return redirect(url('admin-announcement-list'));
+        return redirect(url('admin-announcement-list'))->with('success','Announcement Added Successfully');
     }
 
-    public function edit($id)
+    public function edit($id)   //get announcement info to be edited
     {
         $announcements = Announcement::where('id','=',$id)->first();
 
         return view('AnnouncementView.EditAnnouncementForm', ["announcements" => $announcements]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request)    //update announcement info
     {
         $request->validate([
             'title' => 'required',
@@ -65,11 +63,10 @@ class AnnouncementController extends Controller
             'description' => $description
         ]);
 
-        //return redirect(url('announcement-list'));
-        return redirect()->back()->with('success','Announcement Updated Successfully');
+        return redirect(url('admin-announcement-list'))->with('success','Announcement Updated Successfully');
     }
 
-    public function destroy($id)
+    public function destroy($id)    //delete announcmenet
     {
         Announcement::where('id','=',$id)->delete();
 

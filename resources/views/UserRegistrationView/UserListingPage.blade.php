@@ -1,7 +1,9 @@
 <x-app-layout>
-    <x-slot:title>Admin Announcement List</x-slot>
+    <x-slot:title>User List</x-slot>
 
-    <div class="p-6 w-full max-w-4xl mx-auto" x-data="{ openPopMesg: true, openDelConfirm: false  }">
+
+
+    <div class="p-6 w-full max-w-4xl mx-auto" x-data="{ openPopMesg: true, openDelConfirm: false }">
         <!-- success message -->
         @if ($message = Session::get('success'))
         <div class="px-4 py-2 mb-4 flex justify-between items-center w-full bg-green-400 text-gray-50 font-bold" x-show="openPopMesg" x-transition>
@@ -12,10 +14,11 @@
         </div>
         @endif
 
-        <div class="grid grid-cols-12 items-center w-full pb-6">
-            <h1 class="col-span-6 text-3xl font-semibold text-blue-800">Announcement List</h1>
+
+        <div class="grid grid-cols-12 items-center w-full">
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-6">User List</h1>
             <div class="col-span-6 justify-self-end">
-                <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor" href="{{url('create-announcement')}}"> Create New Announcement</a>
+                <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor" href="{{url('create-user')}}"> Create New User</a>
             </div>
         </div>
 
@@ -24,8 +27,9 @@
                 <thead>
                     <tr class="bg-gray-100 px-4 rounded-md mt-8 font-semibold text-gray-800">
                         <th>No</th>
-                        <th>Title</th>
-                        <th>Description</th>
+                        <th>Name</th>
+                        <th>Email address</th>
+                        <th>Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -33,20 +37,27 @@
                     @php
                     $i = 1;
                     @endphp
-                    @foreach ( $announcements as $ann )
+                    @foreach ( $users as $user )
                     <tr>
                         <td>{{$i++}}</td>
-                        <td>{{$ann->title}}</td>
-                        <td>{{$ann->description}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
                         <td>
-                            <div class="flex">
-                                <a href="{{url('edit-announcement/'.$ann->id)}}" class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded mr-2">Edit</a>
-                            {{-- <a href="{{url('delete-announcement/'.$ann->id)}}" class="btn btn-danger">Delete</a> --}}
-
+                            @if(!empty($user->getRoleNames()))
+                              @foreach($user->getRoleNames() as $v)
+                                {{ $v }}
+                                 {{-- <label class="badge badge-success">{{ $v }}</label> --}}
+                              @endforeach
+                            @endif
+                          </td>
+                        <td>
+                            <div class="flex items-center">
+                                <a href="{{url('edit-user/'.$user->id)}}" class="bg-amber-500 hover:bg-amber-700 text-white font-medium p-2 px-4 rounded">Edit</a>
+                                {{-- <a href="{{url('delete-user/'.$user->id)}}" class="btn btn-danger">Delete</a> --}}
                                 <div>
-                                    <button class="col-span-6 justify-self-end block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor" type="button" x-on:click="openDelConfirm = { id: {{ $ann->id }} }">Delete</button>
+                                    <button class="col-span-6 justify-self-end block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor ml-2" type="button" x-on:click="openDelConfirm = { id: {{ $user->id }} }">Delete</button>
 
-                                    <form action="{{ url('delete-announcement/'.$ann->id) }}" method="POST" x-show="openDelConfirm && openDelConfirm.id === {{ $ann->id }}">
+                                    <form action="{{ url('delete-user/'.$user->id)}}" method="POST" x-show="openDelConfirm && openDelConfirm.id === {{ $user->id }}">
                                         @csrf
                                         @method('DELETE')
                                         <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
