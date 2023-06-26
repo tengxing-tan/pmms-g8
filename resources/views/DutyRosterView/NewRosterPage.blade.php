@@ -46,8 +46,8 @@
                 <thead>
                     <tr>
                         <th class="input-label">Date</th>
-                        <th class="input-label">Start Time</th>
-                        <th class="input-label">End Time</th>
+                        <th class="input-label">Opening Time</th>
+                        <th class="input-label">Closing Time</th>
                         <th></th>
                     </tr>
                 </thead>
