@@ -38,8 +38,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $path = Storage::putFile('public/item_photos', $request->file('item_photo_path'));
-        $path = 'storage/' . substr($path, 7);
+        // Laravel docs: File Uploads
+        if ($request->item_photo_path->isValid()) 
+        {
+            $path = $request->item_photo_path->store('item_photos');
+        } else {
+            
+            return redirect()->back()->with('error', 'Invalid file type.');
+        }
+
         $request->validate([
             'item_name' => 'required|max:255',
             'brand' => 'required|max:255',

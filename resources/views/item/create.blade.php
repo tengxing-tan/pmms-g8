@@ -1,8 +1,17 @@
 <x-app-layout>
     <div class="p-6">
         <form class="mx-auto p-4 w-full max-w-4xl bg-white rounded-lg" action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data" wire:submit.prevent="save">
-            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">New Inventory</h1>
             @csrf
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800 mb-4">New Inventory</h1>
+            <!-- error message -->
+            @if ($message = Session::get('error'))
+            <div class="px-4 py-2 mb-4 flex justify-between items-center w-full bg-rose-400 text-gray-50 font-bold" x-show="openPopMesg" x-transition>
+                <p>{{ $message  }}</p>
+                <button class="flex items-center" x-on:click="openPopMesg = false">
+                    <span class="material-symbols-outlined font-medium">close</span>
+                </button>
+            </div>
+            @endif
 
             <!-- input field -->
             <div class="grid grid-cols-6 gap-x-12 gap-y-6">

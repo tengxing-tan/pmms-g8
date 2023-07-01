@@ -54,7 +54,10 @@
                         </div>
                         <input class="hidden" type="file" wire:model="photo" id="item_photo_path" name="item_photo_path">
                     </label> -->
-                    <img src="{{ asset($item->item_photo_path) }}" alt="photo">
+                    @php
+                    $img_path = asset($item->item_photo_path)
+                    @endphp
+                    <img src="{{ $img_path }}" alt="{{ $img_path }}">
                 </div>
             </div>
 
