@@ -12,14 +12,14 @@
         @endif
 
         <div class="grid grid-cols-12 items-center w-full">
-            <h1 class="col-span-6 text-3xl font-semibold text-gray-800"><a href="{{ route('item.index') }}">{{ $title }}</a></h1>
+            <h1 class="col-span-6 text-3xl font-semibold text-blue-800"><a href="{{ route('item.index') }}">{{ $title }}</a></h1>
             <div class="col-span-6 justify-self-end">
-                <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-700 font-medium text-white cursor" href="{{ route('item.create') }}"> Create New inventory</a>
+                <a class="py-2 px-4 rounded bg-amber-500 hover:bg-amber-600 font-medium text-white cursor" href="{{ route('item.create') }}"> Create New inventory</a>
             </div>
         </div>
     </div>
 
-    <div class="p-6 w-full max-w-4xl mx-auto bg-white text-gray-700 rounded-lg">
+    <div class="p-6 w-full max-w-4xl mx-auto bg-white text-gray-700 rounded-lg shadow-sm shadow-sky-800">
         <!-- search bar -->
         <form class="flex justify-end" action="{{ route('item.filter') }}" method="GET">
             <div class="flex items-center w-56 rounded bg-gray-100 px-2">

@@ -13,7 +13,7 @@ class PaymentController extends Controller
     public function items() {
 
         return view('PaymentView.items', [
-            'items' => Item::latest()->filter(request(['search']))->get()
+            'items' => Item::filter(request(['search']))->get()
         ]);
     }
 
@@ -26,6 +26,10 @@ class PaymentController extends Controller
                 array_push($items, [$item, $request[$i]]);
                 $total_price += $item->item_price * $request[$i];
             }
+        }
+
+        if(count($items) == 0) {
+            return back()->with('error', 'Please select at least one item');
         }
 
         return view('PaymentView.payment', [
@@ -61,6 +65,7 @@ class PaymentController extends Controller
                     'id' => $i, 
                     'quantity' => $request[$i]
                 ]);
+                Item::where('id', $i)->update(['quantity' => $item->quantity - $request[$i]]); 
             }
         }
 
@@ -69,7 +74,7 @@ class PaymentController extends Controller
         return view('PaymentView.receipt', [
             'total_price' => $request['total_price'],
             'paid_amount' => $formFields['paid_amount'],
-            'change' => $change, 
+            'change' => round($change, 2), 
             'items' => $items, 
             'payment' => $payment,
         ]);

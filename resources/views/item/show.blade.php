@@ -12,7 +12,10 @@
                 <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
                     <div class="bg-white rounded shadow-2xl shadow-gray-500/50 p-12 px-24 flex flex-col items-center">
                         <p class="text-xl font-bold text-gray-800 mb-6">Confirm to delete?</p>
-                        <input type="submit" value="Delete" class="block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor" />
+                        <div class="flex">
+                            <input type="submit" value="Delete" class="block py-2 px-4 rounded bg-rose-500 hover:bg-rose-700 font-medium text-white cursor" />
+                            <button class="block ml-4 cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-500 font-medium p-2 px-4 rounded" type="button" x-on:click="openDelConfirm = false">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </form>

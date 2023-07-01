@@ -18,11 +18,7 @@
             </div>
             <div class="flex justify-between my-4 mx-8">
                 <label for="paid_amount" class="font-black text-lg">Payment Amount (RM)</label>
-                <input type="decimal" name="paid_amount" placeholder="Enter Payment Amount" class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" required/>
-
-                @error('paid_amount')
-                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                @enderror
+                <input type="number" name="paid_amount" placeholder="Enter Payment Amount" class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" step="0.01" min="{{$total_price}}" required/>
             </div>
     
             <div class="flex justify-end space-x-6 mx-6 mt-8">
