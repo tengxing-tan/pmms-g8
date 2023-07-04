@@ -1,3 +1,30 @@
+```bash
+git clone https://github.com/tengxing-tan/pmms-g8.git
+cd pmms-g8
+cp .env.example .env
+composer update
+npm install
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+```
+## Login Account
+
+1. AdminCommittee: 
+    - username: adminCommittee@example.com
+    - password: ac1234
+2. Committee
+    - username: committee@example.com
+    - password: com1234
+3. CashierCommittee
+    - username: cashierCommittee@example.com
+    - password: cc1234
+4. Coordinator
+    - username: coordinator@example.com
+    - password: coor1234
+
+----
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
