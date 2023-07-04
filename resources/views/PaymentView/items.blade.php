@@ -1,4 +1,7 @@
 <x-app-layout>
+    @error('error')
+        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+    @enderror
     <div class="mx-12 my-4">
         <form action="/items">          
             <div class="relative m-2 items-center drop-shadow-sm">
@@ -11,22 +14,31 @@
             </div>
         </form>
 
-        <div class="mx-4 mt-8 grid lg:grid-cols-5 gap-12 md:grid-cols-3">
+        <form action="/payment\" method="POST">
+            @csrf
+            <div class="mx-4 mt-8 grid lg:grid-cols-5 gap-12 md:grid-cols-3">
+            
+                @unless(count($items) == 0)
 
-            @unless(count($inventories) == 0)
-        
-            @foreach($items as $item)
-                <x-item-card :item="$item"/>
-            @endforeach
-        
-            @else
-            <p>No items found</p>
-            @endunless
-        
+                @foreach($items as $item)
+                    <x-item-card :item="$item"/>
+                @endforeach
+
+                @else
+                    <p>No listings found</p>
+                @endunless
             </div> 
-        
-            <div class="mt-6 p-4">
-                {{$items->links()}}
+            <div class="flex justify-end mr-6 mt-6">
+                <x-button class="flex pt-2 align-self-end">NEXT</x-button>
             </div>
+        </form>
     </div>
+    <script>
+        // Check if there is an error message in the session flash data
+        var errorMessage = '{{ session("error") }}';
+        if (errorMessage) {
+            // Display the error message in a popup or an alert box
+            alert(errorMessage);
+        }
+    </script>
 </x-app-layout>

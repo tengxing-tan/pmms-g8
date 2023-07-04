@@ -4,7 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Announcement;
 use App\Models\Inventory;
+use App\Models\Item;
+use App\Models\Payment;
+use App\Models\PaymentDetail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,28 +18,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Item::factory(15)->create();
 
-        
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'test@example.com',
-            'password' => bcrypt('test1234'),
+
+        $this->call(RoleSeeder::class);
+        $this->call(AdminSeeder::class);
+
+        Announcement::create([
+            'title' => 'PETAKOM Mart is closed!',
+            'description' => 'Closed on 1 May 2023',
         ]);
-        \App\Models\User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@user.com',
-            'password' => bcrypt('12345678'),
-        ]);
-
-        \App\Models\Item::factory(10)->create();
-        \App\Models\Payment::factory(10)->create();
-        \App\Models\PaymentDetail::factory(20)->create();
+        Item::factory(10)->create();
+        Payment::factory(10)->create();
+        PaymentDetail::factory(20)->create();
         Inventory::factory(10)->create();
+
     }
 }

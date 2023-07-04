@@ -15,6 +15,9 @@
         <!-- alpinejs -->
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+        {{-- canvas.js --}}
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
         <!-- Scripts -->
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -26,7 +29,7 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-indigo-50">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->

@@ -13,4 +13,5 @@ class Announcement extends Model
         'title',
         'description',
     ];
+
 }
