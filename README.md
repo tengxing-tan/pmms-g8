@@ -1,6 +1,6 @@
 # This is a fork. It's like legal pirating
 ```bash
-git clone https://github.com/tengxing-tan/pmms-g8.git
+git clone https://github.com/darwishzain/pmms-g8.git
 cd pmms-g8
 cp .env.example .env
 composer update
