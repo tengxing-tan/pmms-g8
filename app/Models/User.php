@@ -66,4 +66,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Slot::class)->withTimestamps();
     }
 
+    public function availabilities() {
+        return $this->hasMany(Availability::class);
 }
