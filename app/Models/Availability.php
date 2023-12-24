@@ -1,3 +1,7 @@
+<?php
+
+namespace App\Models;
+
 class Availability extends Model
 {
     protected $fillable = ['user_id', 'available_date', 'start_time', 'end_time'];
