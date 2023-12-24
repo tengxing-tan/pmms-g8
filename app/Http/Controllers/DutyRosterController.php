@@ -290,4 +290,22 @@ class DutyRosterController extends Controller
     }
 
 
+    public function updateAvailability(Request $request) {
+    $validatedData = $request->validate([
+        'available_dates' => 'required|array',
+        'available_dates.*.date' => 'required|date',
+        'available_dates.*.start_time' => 'required|date_format:H:i',
+        'available_dates.*.end_time' => 'required|date_format:H:i|after:available_dates.*.start_time'
+    ]);
+
+    foreach ($validatedData['available_dates'] as $availabilityData) {
+        Availability::updateOrCreate(
+            ['user_id' => auth()->id(), 'available_date' => $availabilityData['date']],
+            ['start_time' => $availabilityData['start_time'], 'end_time' => $availabilityData['end_time']]
+        );
+    }
+
+    return back()->with('success', 'Availability updated successfully');
 }
+
+
