@@ -3990,6 +3990,7 @@
         },
         {
             "name": "symfony/css-selector",
+
             "version": "v7.0.0",
             "source": {
                 "type": "git",
@@ -4000,6 +4001,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/css-selector/zipball/bb51d46e53ef8d50d523f0c5faedba056a27943e",
                 "reference": "bb51d46e53ef8d50d523f0c5faedba056a27943e",
+
                 "shasum": ""
             },
             "require": {
@@ -4035,7 +4037,9 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
+
                 "source": "https://github.com/symfony/css-selector/tree/v7.0.0"
+
             },
             "funding": [
                 {
@@ -4051,7 +4055,9 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2023-10-31T17:59:56+00:00"
+
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4197,6 +4203,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
+
             "version": "v7.0.2",
             "source": {
                 "type": "git",
@@ -4215,6 +4222,7 @@
             },
             "conflict": {
                 "symfony/dependency-injection": "<6.4",
+
                 "symfony/service-contracts": "<2.5"
             },
             "provide": {
@@ -4223,6 +4231,7 @@
             },
             "require-dev": {
                 "psr/log": "^1|^2|^3",
+
                 "symfony/config": "^6.4|^7.0",
                 "symfony/dependency-injection": "^6.4|^7.0",
                 "symfony/error-handler": "^6.4|^7.0",
@@ -4230,6 +4239,7 @@
                 "symfony/http-foundation": "^6.4|^7.0",
                 "symfony/service-contracts": "^2.5|^3",
                 "symfony/stopwatch": "^6.4|^7.0"
+
             },
             "type": "library",
             "autoload": {
@@ -4257,7 +4267,9 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
+
                 "source": "https://github.com/symfony/event-dispatcher/tree/v7.0.2"
+
             },
             "funding": [
                 {
@@ -4273,7 +4285,9 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2023-12-27T22:24:19+00:00"
+
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -5735,6 +5749,9 @@
         },
         {
             "name": "symfony/string",
+
+   
+
             "version": "v7.0.2",
             "source": {
                 "type": "git",
@@ -5745,6 +5762,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/string/zipball/cc78f14f91f5e53b42044d0620961c48028ff9f5",
                 "reference": "cc78f14f91f5e53b42044d0620961c48028ff9f5",
+
                 "shasum": ""
             },
             "require": {
@@ -5758,11 +5776,13 @@
                 "symfony/translation-contracts": "<2.5"
             },
             "require-dev": {
+
                 "symfony/error-handler": "^6.4|^7.0",
                 "symfony/http-client": "^6.4|^7.0",
                 "symfony/intl": "^6.4|^7.0",
                 "symfony/translation-contracts": "^2.5|^3.0",
                 "symfony/var-exporter": "^6.4|^7.0"
+
             },
             "type": "library",
             "autoload": {
@@ -5801,7 +5821,9 @@
                 "utf8"
             ],
             "support": {
+
                 "source": "https://github.com/symfony/string/tree/v7.0.2"
+
             },
             "funding": [
                 {
@@ -5817,7 +5839,9 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2023-12-10T16:54:46+00:00"
+
         },
         {
             "name": "symfony/translation",
@@ -8733,6 +8757,8 @@
         },
         {
             "name": "symfony/yaml",
+
+
             "version": "v7.0.0",
             "source": {
                 "type": "git",
@@ -8753,7 +8779,10 @@
                 "symfony/console": "<6.4"
             },
             "require-dev": {
+
+
                 "symfony/console": "^6.4|^7.0"
+
             },
             "bin": [
                 "Resources/bin/yaml-lint"
@@ -8784,6 +8813,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
+
                 "source": "https://github.com/symfony/yaml/tree/v7.0.0"
             },
             "funding": [
@@ -8800,6 +8830,7 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2023-11-07T10:26:03+00:00"
         },
         {

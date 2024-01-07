@@ -20,11 +20,11 @@
                 </label>
                 <label for="unit_cost" class="col-span-2 flex flex-col">
                     <span class="font-medium text-gray-700 mb-1">Unit cost</span>
-                    <input name="unit_cost" id="unit_cost" class="border-none bg-gray-100 rounded focus:ring-2 focus:ring-amber-500" type="number" min="0" value="0" required />
+                    <input name="unit_cost" id="unit_cost" class="border-none bg-gray-100 rounded focus:ring-2 focus:ring-amber-500" type="text" pattern="^[0-9]+(\.[0-9]{0,2})?$" min="0" value="0" required />
                 </label>
                 <label for="item_price" class="col-span-2 flex flex-col">
                     <span class="font-medium text-gray-700 mb-1">Item price</span>
-                    <input name="item_price" id="item_price" class="border-none bg-gray-100 rounded focus:ring-2 focus:ring-amber-500" type="number" min="0" value="0" required />
+                    <input name="item_price" id="item_price" class="border-none bg-gray-100 rounded focus:ring-2 focus:ring-amber-500" type="text" pattern="^[0-9]+(\.[0-9]{0,2})?$" type="number" min="0" value="0" required />
                 </label>
                 <!-- image upload -->
                 <div class="col-span-3 flex flex-col items-start justify-center w-full">
