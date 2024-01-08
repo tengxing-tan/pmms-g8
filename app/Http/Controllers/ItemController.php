@@ -122,7 +122,7 @@ class ItemController extends Controller
     {
         $items = Item::where('item_name', 'like', $request->input('search') . '%')
             ->orWhere('brand', 'like', $request->input('search') . '%')
-            ->orderBy('item_name')
+            ->orderBy($request->input('orderby'),$request->input('order'))
             ->take(10)
             ->get();
 

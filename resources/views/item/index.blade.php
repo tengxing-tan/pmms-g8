@@ -26,6 +26,16 @@
                 <span class="material-symbols-outlined">search</span>
                 <input class="bg-transparent text-sm focus:ring-0 focus:font-medium border-none w-full" type="text" name="search" id="search" placeholder="Search item name">
             </div>
+            <select name="orderby" id="orderby">
+                <option value="item_name">Item Name</option>
+                <option value="brand">Brand</option>
+                <option value="quantity">Quantity</option>
+                <option value="unit_cost">Unit Cost</option>
+                <option value="item_price">Item Price</option>
+            </select>
+            <input type="radio" name="order" id="order" value="asc" checked="checked"><span class="material-symbols-outlined">arrow_downward</span>
+            <input type="radio" name="order" id="order" value="desc"><span class="material-symbols-outlined">arrow_upward</span>
+            <input type="submit" value="Search">
         </form>
 
         <!-- table header -->
