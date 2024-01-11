@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9f42c96f29f2c5210478ae0625c9ea2",
+    "content-hash": "2a367c8759f36f5b128e519e1410636c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -310,6 +310,350 @@
             "time": "2022-10-27T11:44:00+00:00"
         },
         {
+            "name": "doctrine/cache",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/cache.git",
+                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/1ca8f21980e770095a31456042471a57bc4c68fb",
+                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.1 || ^8.0"
+            },
+            "conflict": {
+                "doctrine/common": ">2.2,<2.4"
+            },
+            "require-dev": {
+                "cache/integration-tests": "dev-master",
+                "doctrine/coding-standard": "^9",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+                "psr/cache": "^1.0 || ^2.0 || ^3.0",
+                "symfony/cache": "^4.4 || ^5.4 || ^6",
+                "symfony/var-exporter": "^4.4 || ^5.4 || ^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.",
+            "homepage": "https://www.doctrine-project.org/projects/cache.html",
+            "keywords": [
+                "abstraction",
+                "apcu",
+                "cache",
+                "caching",
+                "couchdb",
+                "memcached",
+                "php",
+                "redis",
+                "xcache"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/cache/issues",
+                "source": "https://github.com/doctrine/cache/tree/2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fcache",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-20T20:07:39+00:00"
+        },
+        {
+            "name": "doctrine/dbal",
+            "version": "3.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/dbal.git",
+                "reference": "0ac3c270590e54910715e9a1a044cc368df282b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0ac3c270590e54910715e9a1a044cc368df282b2",
+                "reference": "0ac3c270590e54910715e9a1a044cc368df282b2",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2",
+                "doctrine/cache": "^1.11|^2.0",
+                "doctrine/deprecations": "^0.5.3|^1",
+                "doctrine/event-manager": "^1|^2",
+                "php": "^7.4 || ^8.0",
+                "psr/cache": "^1|^2|^3",
+                "psr/log": "^1|^2|^3"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "12.0.0",
+                "fig/log-test": "^1",
+                "jetbrains/phpstorm-stubs": "2023.1",
+                "phpstan/phpstan": "1.10.42",
+                "phpstan/phpstan-strict-rules": "^1.5",
+                "phpunit/phpunit": "9.6.13",
+                "psalm/plugin-phpunit": "0.18.4",
+                "slevomat/coding-standard": "8.13.1",
+                "squizlabs/php_codesniffer": "3.7.2",
+                "symfony/cache": "^5.4|^6.0",
+                "symfony/console": "^4.4|^5.4|^6.0",
+                "vimeo/psalm": "4.30.0"
+            },
+            "suggest": {
+                "symfony/console": "For helpful console commands such as SQL execution and import of files."
+            },
+            "bin": [
+                "bin/doctrine-dbal"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\DBAL\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                }
+            ],
+            "description": "Powerful PHP database abstraction layer (DBAL) with many features for database schema introspection and management.",
+            "homepage": "https://www.doctrine-project.org/projects/dbal.html",
+            "keywords": [
+                "abstraction",
+                "database",
+                "db2",
+                "dbal",
+                "mariadb",
+                "mssql",
+                "mysql",
+                "oci8",
+                "oracle",
+                "pdo",
+                "pgsql",
+                "postgresql",
+                "queryobject",
+                "sasql",
+                "sql",
+                "sqlite",
+                "sqlserver",
+                "sqlsrv"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/dbal/issues",
+                "source": "https://github.com/doctrine/dbal/tree/3.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdbal",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-11-19T08:06:58+00:00"
+        },
+        {
+            "name": "doctrine/deprecations",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/deprecations.git",
+                "reference": "4f2d4f2836e7ec4e7a8625e75c6aa916004db931"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/4f2d4f2836e7ec4e7a8625e75c6aa916004db931",
+                "reference": "4f2d4f2836e7ec4e7a8625e75c6aa916004db931",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^9",
+                "phpstan/phpstan": "1.4.10 || 1.10.15",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+                "psalm/plugin-phpunit": "0.18.4",
+                "psr/log": "^1 || ^2 || ^3",
+                "vimeo/psalm": "4.30.0 || 5.12.0"
+            },
+            "suggest": {
+                "psr/log": "Allows logging deprecations via PSR-3 logger implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Deprecations\\": "lib/Doctrine/Deprecations"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A small layer on top of trigger_error(E_USER_DEPRECATED) or PSR-3 logging with options to disable all deprecations or selectively for packages.",
+            "homepage": "https://www.doctrine-project.org/",
+            "support": {
+                "issues": "https://github.com/doctrine/deprecations/issues",
+                "source": "https://github.com/doctrine/deprecations/tree/1.1.2"
+            },
+            "time": "2023-09-27T20:04:15+00:00"
+        },
+        {
+            "name": "doctrine/event-manager",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/event-manager.git",
+                "reference": "750671534e0241a7c50ea5b43f67e23eb5c96f32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/750671534e0241a7c50ea5b43f67e23eb5c96f32",
+                "reference": "750671534e0241a7c50ea5b43f67e23eb5c96f32",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "conflict": {
+                "doctrine/common": "<2.9"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^10",
+                "phpstan/phpstan": "^1.8.8",
+                "phpunit/phpunit": "^9.5",
+                "vimeo/psalm": "^4.28"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                },
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com"
+                }
+            ],
+            "description": "The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.",
+            "homepage": "https://www.doctrine-project.org/projects/event-manager.html",
+            "keywords": [
+                "event",
+                "event dispatcher",
+                "event manager",
+                "event system",
+                "events"
+            ],
+            "support": {
+                "issues": "https://github.com/doctrine/event-manager/issues",
+                "source": "https://github.com/doctrine/event-manager/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fevent-manager",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-10-12T20:59:15+00:00"
+        },
+        {
             "name": "doctrine/inflector",
             "version": "2.0.8",
             "source": {
@@ -537,6 +881,68 @@
                 }
             ],
             "time": "2023-08-10T19:36:49+00:00"
+        },
+        {
+            "name": "dusank/knapsack",
+            "version": "10.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DusanKasan/Knapsack.git",
+                "reference": "cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DusanKasan/Knapsack/zipball/cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba",
+                "reference": "cc29a0bbaadbfcb958b98aa4fd69a4ad7d173bba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "ciaranmcnulty/phpspec-typehintedmethods": "^1.0",
+                "henrikbjorn/phpspec-code-coverage": "^2.0",
+                "phpmd/phpmd": "^2.0",
+                "phpspec/phpspec": "^2.0",
+                "phpunit/phpunit": "^5.0",
+                "squizlabs/php_codesniffer": "^2.0",
+                "symfony/console": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/collection_functions.php",
+                    "src/utility_functions.php"
+                ],
+                "psr-4": {
+                    "DusanKasan\\Knapsack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dusan Kasan",
+                    "email": "dusan@kasan.sk",
+                    "homepage": "http://kasan.sk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Collection library for PHP",
+            "homepage": "https://github.com/DusanKasan/Knapsack",
+            "keywords": [
+                "collections",
+                "map",
+                "reduce",
+                "sequences"
+            ],
+            "support": {
+                "issues": "https://github.com/DusanKasan/Knapsack/issues",
+                "source": "https://github.com/DusanKasan/Knapsack/tree/master"
+            },
+            "time": "2017-04-24T22:52:29+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2969,6 +3375,52 @@
             "time": "2022-06-14T06:56:20+00:00"
         },
         {
+            "name": "php-kit/ext-pdo",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-kit/ext-pdo.git",
+                "reference": "b94bf1805b75ba114e4a216dbca441ca7dc893be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-kit/ext-pdo/zipball/b94bf1805b75ba114e4a216dbca441ca7dc893be",
+                "reference": "b94bf1805b75ba114e4a216dbca441ca7dc893be",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpKit\\ExtPDO\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cláudio Silva",
+                    "email": "claudio.silva@impactwave.com"
+                },
+                {
+                    "name": "Impactwave",
+                    "email": "impactwave@impactwave.com",
+                    "homepage": "http://impactwave.com"
+                }
+            ],
+            "description": "An extension to the standard PHP PDO API",
+            "homepage": "https://github.com/php-kit/ext-pdo",
+            "support": {
+                "issues": "https://github.com/php-kit/ext-pdo/issues",
+                "source": "https://github.com/php-kit/ext-pdo/tree/master"
+            },
+            "time": "2018-04-06T12:17:27+00:00"
+        },
+        {
             "name": "phpoption/phpoption",
             "version": "1.9.2",
             "source": {
@@ -3094,6 +3546,55 @@
                 "source": "https://github.com/antonioribeiro/google2fa/tree/v8.0.1"
             },
             "time": "2022-06-13T21:57:56+00:00"
+        },
+        {
+            "name": "psr/cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
+            },
+            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/clock",
@@ -3813,6 +4314,106 @@
             "time": "2023-11-08T05:53:05+00:00"
         },
         {
+            "name": "simplon/helper",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fightbulc/simplon_helper.git",
+                "reference": "053e7cdb4dc589ad4a773cb039a9b6830e9bb293"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fightbulc/simplon_helper/zipball/053e7cdb4dc589ad4a773cb039a9b6830e9bb293",
+                "reference": "053e7cdb4dc589ad4a773cb039a9b6830e9bb293",
+                "shasum": ""
+            },
+            "require": {
+                "dusank/knapsack": "^10.0",
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Simplon\\Helper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tino Ehrich",
+                    "email": "tino@bigpun.me",
+                    "role": "developer"
+                }
+            ],
+            "description": "Helpers for recurring requirements",
+            "homepage": "https://github.com/fightbulc/simplon_helper",
+            "keywords": [
+                "casts",
+                "passwords",
+                "tokens"
+            ],
+            "support": {
+                "issues": "https://github.com/fightbulc/simplon_helper/issues",
+                "source": "https://github.com/fightbulc/simplon_helper/tree/1.0.8"
+            },
+            "time": "2020-02-21T14:19:38+00:00"
+        },
+        {
+            "name": "simplon/mysql",
+            "version": "2.2.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fightbulc/simplon_mysql.git",
+                "reference": "21da390cb2b3846a2407a410486b4642501e3098"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fightbulc/simplon_mysql/zipball/21da390cb2b3846a2407a410486b4642501e3098",
+                "reference": "21da390cb2b3846a2407a410486b4642501e3098",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": ">=7.1",
+                "simplon/helper": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Test\\": "test/",
+                    "Simplon\\Mysql\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tino Ehrich",
+                    "email": "tino@bigpun.me",
+                    "role": "developer"
+                }
+            ],
+            "description": "Simplon MySQL Library",
+            "homepage": "https://github.com/fightbulc/simplon_mysql",
+            "keywords": [
+                "db",
+                "manager",
+                "mysql",
+                "pdo"
+            ],
+            "support": {
+                "issues": "https://github.com/fightbulc/simplon_mysql/issues",
+                "source": "https://github.com/fightbulc/simplon_mysql/tree/master"
+            },
+            "time": "2017-11-22T10:17:02+00:00"
+        },
+        {
             "name": "spatie/laravel-permission",
             "version": "5.11.1",
             "source": {
@@ -3990,7 +4591,6 @@
         },
         {
             "name": "symfony/css-selector",
-
             "version": "v7.0.0",
             "source": {
                 "type": "git",
@@ -4001,7 +4601,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/css-selector/zipball/bb51d46e53ef8d50d523f0c5faedba056a27943e",
                 "reference": "bb51d46e53ef8d50d523f0c5faedba056a27943e",
-
                 "shasum": ""
             },
             "require": {
@@ -4037,9 +4636,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-
                 "source": "https://github.com/symfony/css-selector/tree/v7.0.0"
-
             },
             "funding": [
                 {
@@ -4055,9 +4652,7 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2023-10-31T17:59:56+00:00"
-
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4203,7 +4798,6 @@
         },
         {
             "name": "symfony/event-dispatcher",
-
             "version": "v7.0.2",
             "source": {
                 "type": "git",
@@ -4222,7 +4816,6 @@
             },
             "conflict": {
                 "symfony/dependency-injection": "<6.4",
-
                 "symfony/service-contracts": "<2.5"
             },
             "provide": {
@@ -4231,7 +4824,6 @@
             },
             "require-dev": {
                 "psr/log": "^1|^2|^3",
-
                 "symfony/config": "^6.4|^7.0",
                 "symfony/dependency-injection": "^6.4|^7.0",
                 "symfony/error-handler": "^6.4|^7.0",
@@ -4239,7 +4831,6 @@
                 "symfony/http-foundation": "^6.4|^7.0",
                 "symfony/service-contracts": "^2.5|^3",
                 "symfony/stopwatch": "^6.4|^7.0"
-
             },
             "type": "library",
             "autoload": {
@@ -4267,9 +4858,7 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
-
                 "source": "https://github.com/symfony/event-dispatcher/tree/v7.0.2"
-
             },
             "funding": [
                 {
@@ -4285,9 +4874,7 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2023-12-27T22:24:19+00:00"
-
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -5749,9 +6336,6 @@
         },
         {
             "name": "symfony/string",
-
-   
-
             "version": "v7.0.2",
             "source": {
                 "type": "git",
@@ -5762,7 +6346,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/string/zipball/cc78f14f91f5e53b42044d0620961c48028ff9f5",
                 "reference": "cc78f14f91f5e53b42044d0620961c48028ff9f5",
-
                 "shasum": ""
             },
             "require": {
@@ -5776,13 +6359,11 @@
                 "symfony/translation-contracts": "<2.5"
             },
             "require-dev": {
-
                 "symfony/error-handler": "^6.4|^7.0",
                 "symfony/http-client": "^6.4|^7.0",
                 "symfony/intl": "^6.4|^7.0",
                 "symfony/translation-contracts": "^2.5|^3.0",
                 "symfony/var-exporter": "^6.4|^7.0"
-
             },
             "type": "library",
             "autoload": {
@@ -5821,9 +6402,7 @@
                 "utf8"
             ],
             "support": {
-
                 "source": "https://github.com/symfony/string/tree/v7.0.2"
-
             },
             "funding": [
                 {
@@ -5839,9 +6418,7 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2023-12-10T16:54:46+00:00"
-
         },
         {
             "name": "symfony/translation",
@@ -8757,8 +9334,6 @@
         },
         {
             "name": "symfony/yaml",
-
-
             "version": "v7.0.0",
             "source": {
                 "type": "git",
@@ -8779,10 +9354,7 @@
                 "symfony/console": "<6.4"
             },
             "require-dev": {
-
-
                 "symfony/console": "^6.4|^7.0"
-
             },
             "bin": [
                 "Resources/bin/yaml-lint"
@@ -8813,7 +9385,6 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-
                 "source": "https://github.com/symfony/yaml/tree/v7.0.0"
             },
             "funding": [
@@ -8830,7 +9401,6 @@
                     "type": "tidelift"
                 }
             ],
-
             "time": "2023-11-07T10:26:03+00:00"
         },
         {
