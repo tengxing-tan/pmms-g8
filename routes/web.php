@@ -148,6 +148,7 @@ Route::middleware([
     Route::post('/add-slot/{slotId}', 'App\Http\Controllers\DutyRosterController@addSlot')->name('addSlot');
     Route::get('/schedule', 'App\Http\Controllers\DutyRosterController@showSchedule')->name('schedule');
     Route::delete('/slots/{slotId}', 'App\Http\Controllers\DutyRosterController@deleteTimeSlot')->name('deleteTimeSlot');
+    Route::post('/update-availability', [DutyRosterController::class, 'updateAvailability'])->name('update-availability');
 
 });
 
