@@ -33,8 +33,8 @@
                 <option value="unit_cost">Unit Cost</option>
                 <option value="item_price">Item Price</option>
             </select>
-            <input type="radio" name="order" id="order" value="asc" checked="checked"><span class="material-symbols-outlined">arrow_downward</span>
-            <input type="radio" name="order" id="order" value="desc"><span class="material-symbols-outlined">arrow_upward</span>
+            <input type="radio" name="order" id="order" value="asc" checked="checked"><span class="material-symbols-outlined">arrow_upward</span>
+            <input type="radio" name="order" id="order" value="desc"><span class="material-symbols-outlined">arrow_downward</span>
             <input type="submit" value="Search">
         </form>
 
